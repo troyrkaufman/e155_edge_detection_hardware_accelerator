@@ -13,9 +13,9 @@
 
 // Initialize I2C
 
-void init_I2C();
+void init_I2C(void);
 
-char write_I2C(char addr, char index, char data);
+void write_I2C(char addr, const uint8_t * data, int length);
 
 #endif
 
