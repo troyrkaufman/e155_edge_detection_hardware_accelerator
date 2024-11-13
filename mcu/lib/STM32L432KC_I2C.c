@@ -23,13 +23,19 @@ void init_I2C() {
     // Disable clock stretching
     I2C1->CR1 &= ~I2C_CR1_NOSTRETCH;
 
+    // Clear the ACK bit in the CR2 register to ensure ACK is sent by default
+    I2C1->CR2 &= ~I2C_CR2_NACK; // Or in CR1 for some MCUs: I2C1->CR1 &= ~I2C_CR1_ACK;
+
     // Set up autoend
-    I2C1->CR2 |= I2C_CR2_AUTOEND;
+    //I2C1->CR2 |= I2C_CR2_AUTOEND;
 
     // Reset I2C Peripheral
     I2C1->CR1 &= ~I2C_CR1_PE; // Disable I2C1
     I2C1->CR1 |= I2C_CR1_SWRST; // Reset I2C
     I2C1->CR1 &= ~I2C_CR1_SWRST; // Clear reset
+
+    // Enable the I2C peripheral
+    //I2C1->CR1 |= I2C_CR1_PE;
 
     // Select Open Drain Output ... USE EXTERNAL PULL UPS (4.7k ~ 10K)
 
@@ -43,8 +49,8 @@ void init_I2C() {
     GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL9, 4);
 
     //3. Reset the I2C Peripheral
-    I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 1); // Reset System
-    I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 0); // Pull from reset
+    //I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 1); // Reset System
+    //I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 0); // Pull from reset
 
     //4. Program the peripheral input clock in I2C_CR2 Register in order to generate correct timings
     I2C1->TIMINGR |= _VAL2FLD(I2C_TIMINGR_PRESC, 1);
@@ -57,10 +63,12 @@ void init_I2C() {
     I2C1->CR1 |= I2C_CR1_PE;
 }
 
-void write_I2C(char addr, const uint8_t * data, int length){
+void write_I2C(char addr, uint8_t reg, uint8_t data){
+
+
 
     // Clear CR2 settings from previous transactions
-    I2C1->CR2 &= ~(I2C_CR2_SADD | I2C_CR2_NBYTES | I2C_CR2_START | I2C_CR2_RD_WRN);
+    I2C1->CR2 &= ~(I2C_CR2_SADD | I2C_CR2_NBYTES | I2C_CR2_RD_WRN);
 
     // Master operates in 7-bit addressing mode
     I2C1->CR2 &= ~I2C_CR2_ADD10;
@@ -72,16 +80,21 @@ void write_I2C(char addr, const uint8_t * data, int length){
     I2C1->CR2 &= ~I2C_CR2_RD_WRN;
 
     // Number of bytes that will be sent
-    I2C1->CR2 |= _VAL2FLD(I2C_CR2_NBYTES, length);
+    I2C1->CR2 |= _VAL2FLD(I2C_CR2_NBYTES, 3);
 
-    // Start I2C Master Write
-    I2C1->CR2 |= I2C_CR2_START;
+    // Start I2C Master Write after tx buffer is cleared
+    while (!(I2C1->ISR & I2C_ISR_TXE));
+        I2C1->CR2 |= I2C_CR2_START;
+        I2C1->ICR |= I2C_ICR_STOPCF;
+        I2C1->ICR |= I2C_ICR_NACKCF;
 
-    // Poll for TXIS bit to be set
-    for (volatile int i = 0; i < length; i++){
-        while (!(I2C1->ISR & I2C_ISR_TXE));
-            *(volatile char *) (&I2C1->TXDR) = data[i];
-    }
+    // Write the register's data address to be configured
+    //while (!(I2C1->ISR & I2C_ISR_TXE));
+        *(volatile char *) (&I2C1->TXDR) = reg;
+
+    // Write a data value to the resister
+    while (!(I2C1->ISR & I2C_ISR_TXE));
+        *(volatile char *) (&I2C1->TXDR) = data;
 
     //autoend will stop the process
 

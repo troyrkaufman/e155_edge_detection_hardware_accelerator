@@ -11,8 +11,8 @@ Date: 11/12/24
 #define addr 0x30 // write address to camera module
 #define length 6
 
-//const uint8_t index[length] = {0xff, 0x34, 0x02, 0x44, 0x56, 0x41};
-const uint8_t cfgr[length] = {0x301, 0x44, 0x65, 0x43, 0x21, 0x40};
+uint8_t reg[length] = {0xda, 0x34, 0x02, 0x44, 0x56, 0x41};
+uint8_t data[length] = {0x06, 0x44, 0x65, 0x43, 0x21, 0x40};
 
 
 int main(void){
@@ -26,7 +26,7 @@ int main(void){
     
     init_I2C();
 
-    write_I2C(addr, cfgr, length);
+    write_I2C(addr, reg[0], data[0]);
 
     while(1);
 
