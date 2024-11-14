@@ -6,7 +6,7 @@
 void configurePLL() {
    // Set clock to 80 MHz
    // Output freq = (src_clk) * (N/M) / P
-   // (4 MHz) * (80/2) * 2  = 80 MHz
+   // (4 MHz) * (64/2) * 2  = 64 MHz
    // M:, N:, P:
    // Use HSI as PLLSRC
 

@@ -7,12 +7,15 @@
 #include "STM32L432KC_RCC.h"
 
 void init_I2C() {
-    
-    // Enable the I2C CLOCK
-    RCC->APB1ENR1 |= _VAL2FLD(RCC_APB1ENR1_I2C1EN, 1);
+
+    // Specify that the pclk will represent the I2C_CLK
+    RCC->CCIPR |= _VAL2FLD(RCC_CCIPR_I2C1SEL, 0b00);
 
     // Set pclk to 8Mhz by settting the prescalar to 8 (sysclk is 64 Mhz)
     RCC->CFGR |= _VAL2FLD(RCC_CFGR_PPRE1, 0b110);
+
+    // Enable the I2C CLOCK
+    RCC->APB1ENR1 |= _VAL2FLD(RCC_APB1ENR1_I2C1EN, 1);
 
     // Enable the analog filter
     I2C1->CR1 &= ~I2C_CR1_ANFOFF;
@@ -24,20 +27,22 @@ void init_I2C() {
     I2C1->CR1 &= ~I2C_CR1_NOSTRETCH;
 
     // Clear the ACK bit in the CR2 register to ensure ACK is sent by default
-    I2C1->CR2 &= ~I2C_CR2_NACK; // Or in CR1 for some MCUs: I2C1->CR1 &= ~I2C_CR1_ACK;
+    I2C1->CR2 &= ~I2C_CR2_NACK; 
 
     // Set up autoend
-    //I2C1->CR2 |= I2C_CR2_AUTOEND;
+    I2C1->CR2 |= I2C_CR2_AUTOEND;
+
+    // Enable the TXIS interrupt
+    I2C1->CR1 |= I2C_ISR_TXIS;
 
     // Reset I2C Peripheral
     I2C1->CR1 &= ~I2C_CR1_PE; // Disable I2C1
     I2C1->CR1 |= I2C_CR1_SWRST; // Reset I2C
     I2C1->CR1 &= ~I2C_CR1_SWRST; // Clear reset
 
-    // Enable the I2C peripheral
-    //I2C1->CR1 |= I2C_CR1_PE;
-
     // Select Open Drain Output ... USE EXTERNAL PULL UPS (4.7k ~ 10K)
+    GPIOA->OTYPER |= (GPIO_OTYPER_OT9);
+    GPIOA->OTYPER |= (GPIO_OTYPER_OT10);
 
     // Configure the GPIO pins in ALT mode
     gpioEnable(GPIO_PORT_A);
@@ -61,12 +66,11 @@ void init_I2C() {
 
     // Enable the I2C peripheral
     I2C1->CR1 |= I2C_CR1_PE;
+    
 }
 
-void write_I2C(char addr, uint8_t reg, uint8_t data){
-
-
-
+void write_I2C(char addr, char reg, char data){
+  
     // Clear CR2 settings from previous transactions
     I2C1->CR2 &= ~(I2C_CR2_SADD | I2C_CR2_NBYTES | I2C_CR2_RD_WRN);
 
@@ -80,20 +84,17 @@ void write_I2C(char addr, uint8_t reg, uint8_t data){
     I2C1->CR2 &= ~I2C_CR2_RD_WRN;
 
     // Number of bytes that will be sent
-    I2C1->CR2 |= _VAL2FLD(I2C_CR2_NBYTES, 3);
+    I2C1->CR2 |= _VAL2FLD(I2C_CR2_NBYTES, 2);
 
     // Start I2C Master Write after tx buffer is cleared
-    while (!(I2C1->ISR & I2C_ISR_TXE));
-        I2C1->CR2 |= I2C_CR2_START;
-        I2C1->ICR |= I2C_ICR_STOPCF;
-        I2C1->ICR |= I2C_ICR_NACKCF;
+    I2C1->CR2 |= I2C_CR2_START;  
 
     // Write the register's data address to be configured
-    //while (!(I2C1->ISR & I2C_ISR_TXE));
+    while (!(I2C1->ISR & I2C_ISR_TXIS));
         *(volatile char *) (&I2C1->TXDR) = reg;
 
     // Write a data value to the resister
-    while (!(I2C1->ISR & I2C_ISR_TXE));
+    while (!(I2C1->ISR & I2C_ISR_TXIS));
         *(volatile char *) (&I2C1->TXDR) = data;
 
     //autoend will stop the process
