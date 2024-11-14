@@ -53,11 +53,7 @@ void init_I2C() {
     GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL10, 4);
     GPIOA->AFR[1] |= _VAL2FLD(GPIO_AFRH_AFSEL9, 4);
 
-    //3. Reset the I2C Peripheral
-    //I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 1); // Reset System
-    //I2C1->CR1 |= _VAL2FLD(I2C_CR1_SWRST, 0); // Pull from reset
-
-    //4. Program the peripheral input clock in I2C_CR2 Register in order to generate correct timings
+    //Program the peripheral input clock in I2C_CR2 Register in order to generate correct timings
     I2C1->TIMINGR |= _VAL2FLD(I2C_TIMINGR_PRESC, 1);
     I2C1->TIMINGR |= _VAL2FLD(I2C_TIMINGR_SCLDEL, 0x4);
     I2C1->TIMINGR |= _VAL2FLD(I2C_TIMINGR_SDADEL, 0x2);
