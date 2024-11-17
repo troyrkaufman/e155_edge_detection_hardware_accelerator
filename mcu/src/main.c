@@ -59,20 +59,21 @@ int main(void){
 
     // Designate the SPI pins for Camera Module and MCU communication
     pinMode(PA5, GPIO_ALT);    // SCK
-    pinMode(PA7, GPIO_ALT);    // MOSI
+    //pinMode(PA7, GPIO_ALT);    // MOSI We'll use PA7 in reality but for now we'll use PB
+    pinMode(PB5, GPIO_ALT);    // MOSI
     pinMode(PA6, GPIO_ALT);    // MISO
     pinMode(PA8, GPIO_OUTPUT); // CE
 
     // Designate the SPI pins for MCU and FPGA communication
-    pinMode(PB3, GPIO_ALT);    // SCK
-    pinMode(PB5, GPIO_ALT);    // MOSI
-    pinMode(PB4, GPIO_ALT);    // MISO
-    pinMode(PC15, GPIO_OUTPUT); // CE
+    //pinMode(PB3, GPIO_ALT);    // SCK
+    //pinMode(PB5, GPIO_ALT);    // MOSI
+    //pinMode(PB4, GPIO_ALT);    // MISO
+    //pinMode(PC15, GPIO_OUTPUT); // CE
 
     // Give SPI pins proper ALT functinos
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // SCK PA5
-    GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL7, 5); // SDI PA7
-    GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // SDO PA6
+    GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // MOSI PA7
+    GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
 
     initSPI(SPI1, 7, 0, 0);
 
@@ -81,23 +82,23 @@ int main(void){
     ////////////////////////////////
 
     // Turn on DMA controller in RCC
-    RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
-    RCC->AHB1ENR |= (RCC_AHB1ENR_DMA2EN);
+   // RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
+   // RCC->AHB1ENR |= (RCC_AHB1ENR_DMA2EN);
 
-    init(DMA1_Channel1_BASE, SPI1, true, rxBuffer1);
-    init(DMA2_Channel2_BASE, SPI3, false, txBuffer1);
+   // init(DMA1_Channel1_BASE, SPI1, true, rxBuffer1);
+   // init(DMA2_Channel2_BASE, SPI3, false, txBuffer1);
 
     ////////////////////////////
     // SPI Transmission
     ////////////////////////////
-    
 
-    while(1){
-        
-        digitalWrite(PA8, 1);
-        spiSendReceive(SPI1, 0x61);
-        spiSendReceive(SPI1, 0x00);
+    digitalWrite(PA8, 1);
+    
+    while(1){  
         digitalWrite(PA8, 0);
+        spiSendReceive(SPI1, 0x00);
+        spiSendReceive(SPI1, 0x00);
+        digitalWrite(PA8, 1);
     }
 
 }
@@ -123,6 +124,7 @@ void DMA1_Channel2_IRQHandler(void) {
     }
 }
 */
+
 /*
 
 uint8_t grayscaleConversion(uint16_t pixel) {

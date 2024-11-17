@@ -49,8 +49,9 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send){
     // Read byte once
     return SPIx->DR;
 }
-
+/*
 char readByte(SPI_TypeDef * SPIx, char byte){
     spiSendReceive(SPIx, READ_ADDRESS);
     return spiSendReceive(spiSendReceive, 0x00);
 }
+*/
