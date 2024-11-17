@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stm32l432xx.h>  // CMSIS device library include
+#include <stdbool.h>
 
 // Include other peripheral libraries
 
@@ -19,6 +20,7 @@
 #include "STM32L432KC_USART.h"
 #include "STM32L432KC_SPI.h"
 #include "STM32L432KC_I2C.h"
+#include "STM32L432KC_DMA.h"
 
 // Global defines
 
