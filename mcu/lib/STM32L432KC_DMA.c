@@ -3,11 +3,9 @@
 
 #include "STM32L432KC_DMA.h"
 
-uint8_t rxbuffer1[BUFFER_SIZE_R];
-uint8_t rxbuffer2[BUFFER_SIZE_R];
+uint8_t rxBuffer1[BUFFER_SIZE_R];
 
-uint8_t txbuffer1[BUFFER_SIZE_T];
-uint8_t txbuffer2[BUFFER_SIZE_T];
+uint8_t txBuffer1[BUFFER_SIZE_T];
 
 void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
     // TODO: Reset DMA channel configuration
@@ -42,7 +40,7 @@ void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
         DMAx->CCR |= _VAL2FLD(DMA_CCR_PL, 1);
 
         // TODO: Dest.: Memory address
-        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &rxbuffer1);
+        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &rxBuffer1);
 
         // TODO: Set DMA data transfer length (# of samples).
         DMAx->CNDTR |= BUFFER_SIZE_R;
@@ -57,7 +55,7 @@ void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
         DMAx->CCR |= _VAL2FLD(DMA_CCR_PL, 2);
 
         // TODO: Dest.: Memory address
-        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &txbuffer1);
+        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &txBuffer1);
 
         // TODO: Set DMA data transfer length (# of samples).
         DMAx->CNDTR |= BUFFER_SIZE_T;
