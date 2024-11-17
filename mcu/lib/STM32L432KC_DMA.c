@@ -3,15 +3,8 @@
 
 #include "STM32L432KC_DMA.h"
 
-uint8_t rxBuffer1[BUFFER_SIZE_R];
-
-uint8_t txBuffer1[BUFFER_SIZE_T];
-
-void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
+void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA, uint8_t buffer){
     // TODO: Reset DMA channel configuration
-
-    // Turn on DMA controller in RCC
-    RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
 
     // Reset DMA controller
     DMAx->CCR  &= ~(0xFFFFFFFF);
@@ -28,7 +21,7 @@ void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
     // Turn on circular addressing
     DMAx->CCR |= _VAL2FLD(DMA_CCR_CIRC, 1);
 
-    // Source: Address of the peripheraly.
+    // Source: Address of the peripheral
     DMAx->CPAR |= _VAL2FLD(DMA_CPAR_PA, (uint32_t) &SPIx->DR);
 
     
@@ -40,7 +33,7 @@ void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
         DMAx->CCR |= _VAL2FLD(DMA_CCR_PL, 1);
 
         // TODO: Dest.: Memory address
-        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &rxBuffer1);
+        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &buffer);
 
         // TODO: Set DMA data transfer length (# of samples).
         DMAx->CNDTR |= BUFFER_SIZE_R;
@@ -55,7 +48,7 @@ void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA){
         DMAx->CCR |= _VAL2FLD(DMA_CCR_PL, 2);
 
         // TODO: Dest.: Memory address
-        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &txBuffer1);
+        DMAx->CMAR |= _VAL2FLD(DMA_CMAR_MA, (uint32_t) &buffer);
 
         // TODO: Set DMA data transfer length (# of samples).
         DMAx->CNDTR |= BUFFER_SIZE_T;

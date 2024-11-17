@@ -13,7 +13,7 @@
 #define BUFFER_SIZE_R 1280
 #define BUFFER_SIZE_T 640
 
-void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA);
+void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA, uint8_t buffer);
 
 #endif
 
