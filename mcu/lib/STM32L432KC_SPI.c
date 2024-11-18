@@ -14,8 +14,8 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
   
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_BR, 0b0111);
     
-    SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPOL, 0b0);
-    SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPHA, 0b1);
+    SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPOL, cpol);
+    SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPHA, cpha);
     
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_LSBFIRST, 0b0);
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_CRCEN, 0b0);
