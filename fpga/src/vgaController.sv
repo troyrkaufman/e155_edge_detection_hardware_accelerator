@@ -24,13 +24,21 @@ module vgaController #(
     if (rst) begin
       hCnt <= 0;
       vCnt <= 0;
-    end
-    else begin
+    end else begin
       hCnt++;
       if (hCnt == HMAX) begin
-        
+        hCnt <= 0;
+        vCnt++;
+        if (vCnt == VMAX) begin
+          vCnt <= 0;
+        end
       end
     end
+
+    assign hSync = (hCnt >= HSYNC) && (hCnt < HSYNC + HBP);
+    assign vSync = (vCnt >= VSYNC) && (vCnt < VSYNC + VBP);
+    assign syncB = hSync && vSync;
+    assign blankB = hSync || vSync;
   end
 
 endmodule
