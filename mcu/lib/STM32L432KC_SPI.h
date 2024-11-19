@@ -10,6 +10,8 @@
 #include <stdint.h>
 #include <stm32l432xx.h>
 
+#define READ_ADDRESS 0x61
+
 ///////////////////////////////////////////////////////////////////////////////
 // Function prototypes
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,11 +22,15 @@
  *    -- cpha: clock phase (0: data captured on leading edge of clk and changed on next edge, 
  *          1: data changed on leading edge of clk and captured on next edge)
  * Refer to the datasheet for more low-level details. */ 
-void initSPI(int br, int cpol, int cpha);
+
+// Initialize SPI
+void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
 
 /* Transmits a character (1 byte) over SPI and returns the received character.
  *    -- send: the character to send over SPI
  *    -- return: the character received over SPI */
-char spiSendReceive(char send);
+char spiSendReceive(SPI_TypeDef * SPIx, char send);
+
+void readByte(SPI_TypeDef * SPIx, char byte);
 
 #endif
