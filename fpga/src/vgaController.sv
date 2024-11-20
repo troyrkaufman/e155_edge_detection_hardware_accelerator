@@ -11,34 +11,34 @@ module vgaController #(
     VMAX = VBP + VACTIVE + VSYNC
 ) (
     input logic vgaClk,
-    rst,
+    nrst,
     output logic hSync,
     vSync,
-    syncV,
+    syncB,
     blankB,
     output logic [9:0] hCount,
     vCount
 );
 
-  always @(posedge vgaClk, posedge rst) begin
-    if (rst) begin
-      hCnt <= 0;
-      vCnt <= 0;
+  always_ff @(posedge vgaClk, negedge nrst) begin
+    if (~nrst) begin
+      hCount <= 0;
+      vCount <= 0;
     end else begin
-      hCnt++;
-      if (hCnt == HMAX) begin
-        hCnt <= 0;
-        vCnt++;
-        if (vCnt == VMAX) begin
-          vCnt <= 0;
+      hCount <= hCount + 1;
+      if (hCount == HMAX) begin
+        hCount <= 0;
+        vCount <= vCount + 1;
+        if (vCount == VMAX) begin
+          vCount <= 0;
         end
       end
     end
-
-    assign hSync = (hCnt >= HSYNC) && (hCnt < HSYNC + HBP);
-    assign vSync = (vCnt >= VSYNC) && (vCnt < VSYNC + VBP);
-    assign syncB = hSync && vSync;
-    assign blankB = hSync || vSync;
   end
+
+  assign hSync  = ~( (hCount >= (HACTIVE + HFP)) & (hCount < (HACTIVE + HFP + HSYNC)) );
+  assign vSync  = ~( (vCount >= (VACTIVE + VFP)) & (vCount < (VACTIVE + VFP + VSYNC)) );
+  assign syncB  = 1'b0;
+  assign blankB = hSync & vSync;
 
 endmodule

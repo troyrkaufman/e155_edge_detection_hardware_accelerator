@@ -1,15 +1,38 @@
 module vga (
-  input logic clk, rst,
-  output logic vgaClk,
-  output logic hSync, vSync,
-  output logic syncB, blankB,
-  output logic [7:0] r, g, b
+    input logic clk,
+    nrst,
+    output logic vgaClk,
+    output logic hSync,
+    vSync,
+    output logic syncB,
+    blankB,
+    output logic [3:0] r,
+    g,
+    b
 );
   logic [9:0] x, y;
+  //   logic idk;
+  vgaPll pll (
+      .ref_clk_i(clk),
+      .rst_n_i(nrst),
+      .outcore_o(vgaClk),
+      .outglobal_o()
+  );
 
-  pll vgaPll(.inclk0(clk), .c0(vgaClk));
+  vgaController vgaCont (
+      vgaClk,
+      nrst,
+      hSync,
+      vSync,
+      blankB,
+      syncB,
+      x,
+      y
+  );
 
-  vgaController vgaCont(vgaClk, rst, hSync, vSync, syncB, blankB, x, y);
-
-  videoGen videoGen(x,y,r,g,b);
+  always_comb begin
+    r = x[3:0];
+    g = x[7:4];
+    b = {x[9:8], 2'b00};
+  end
 endmodule

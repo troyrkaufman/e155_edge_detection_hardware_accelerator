@@ -1,12 +1,15 @@
 module uPLogoRom (
-  input logic [9:0] xVal, yVal,
-  output logic [2:0][7:0] pixel
+    input logic clk,
+    input logic [9:0] xVal,
+    yVal,
+    output logic pixelPresent
 );
-  logic [2:0][7:0] logoRom [0:307200] // 640x480 to store RGB values
-  initial begin
-    // Initialize logoRom with RGB values
-    $readmemh("hex.txt", logoRom);
-  end
+  logic [4:0] logoRom[2:0];  // 640x480 to store RGB values
 
-  assign pixel = logoRom[xVal + yVal * 640];
+  // Initialize logoRom with RGB values
+  initial $readmemh("hex.txt", logoRom);
+
+  always_ff @(posedge clk) begin
+    pixelPresent <= logoRom[yVal[2:0]][xVal[2:0]];
+  end
 endmodule
