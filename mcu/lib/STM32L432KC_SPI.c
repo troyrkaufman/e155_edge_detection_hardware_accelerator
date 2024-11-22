@@ -6,7 +6,7 @@
 
 #include "STM32L432KC_SPI.h"
 
-void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
+void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
 
 // TODO: Add SPI initialization code
    // Turn on SPI clock domain
@@ -30,6 +30,13 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
     
     SPIx->CR2 &= ~SPI_CR2_NSSP;
 
+    // DMA request logic
+    if (receive == true){
+        SPIx->CR2 |= _VAL2FLD(SPI_CR2_RXDMAEN, 1);
+    } else {
+        SPIx->CR2 |= _VAL2FLD(SPI_CR2_TXDMAEN, 1);
+    }
+
     SPIx->CR1 |= SPI_CR1_SPE;
 }
 
@@ -49,9 +56,3 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send){
     // Read byte once
     return SPIx->DR;
 }
-/*
-char readByte(SPI_TypeDef * SPIx, char byte){
-    spiSendReceive(SPIx, READ_ADDRESS);
-    return spiSendReceive(spiSendReceive, 0x00);
-}
-*/

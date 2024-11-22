@@ -1,8 +1,8 @@
 // STM32L432KC_DMA.h
 // Header file for DMA peripheral
 
-#ifndef STM32L4_SPI_H
-#define STM32L4_SPI_H
+#ifndef STM32L4_DMA_H
+#define STM32L4_DMA_H
 
 #include <stdint.h>
 #include <stm32l432xx.h>

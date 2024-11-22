@@ -9,6 +9,7 @@
 
 #include <stdint.h>
 #include <stm32l432xx.h>
+#include <stdbool.h>
 
 #define READ_ADDRESS 0x61
 
@@ -24,13 +25,11 @@
  * Refer to the datasheet for more low-level details. */ 
 
 // Initialize SPI
-void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
+void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receive);
 
 /* Transmits a character (1 byte) over SPI and returns the received character.
  *    -- send: the character to send over SPI
  *    -- return: the character received over SPI */
 char spiSendReceive(SPI_TypeDef * SPIx, char send);
-
-void readByte(SPI_TypeDef * SPIx, char byte);
 
 #endif

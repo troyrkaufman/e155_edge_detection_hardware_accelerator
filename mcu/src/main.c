@@ -8,65 +8,6 @@ Date: 11/12/24
 #include <stdio.h>
 #include "main.h"
 
-#define ADDR 0x30 // write ADDRess to camera module
-#define LENGTH 43
-#define BUFFER_SIZE_R 1280
-#define BUFFER_SIZE_T 640
-#define PIXEL_BYTES 2
-
-/*
-const unsigned char reg[] = {
-    0xff, 0x11, 0x12, 0xDA, 0xC2, 0x17, 0x18, 0x32, 0x19, 0x1a, 
-    0x03, 0x37, 0x4f, 0x50, 0x5a, 0x6d, 0x3d, 0x39, 0x35, 0x22, 
-    0x37, 0x34, 0x06, 0x0d, 0x0e, 0xff, 0xe0, 0xc0, 0xc1, 0x86, 
-    0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x57, 0x5a, 0x5b, 0x5c, 
-    0xd3, 0xe0, 0xff
-};
-
-const unsigned char data[] = {
-    0x00, 0x01, 0x00, 0x04, 0x02, 0x11, 0x75, 0x36, 0x01, 0x97, 
-    0x0f, 0x40, 0xbb, 0x9c, 0x57, 0x80, 0x34, 0x02, 0x88, 0x0a, 
-    0x40, 0xa0, 0x02, 0xb7, 0x01, 0x00, 0x04, 0xc8, 0x96, 0x3d, 
-    0x89, 0x90, 0x2c, 0x00, 0x00, 0x88, 0x00, 0xa0, 0x78, 0x00, 
-    0x04, 0x00, 0xff
-};
-*/
-
-const unsigned char reg[] = {
-    0xff, 0x11, 0x12, 0xDA, 0xC2, 0x17, 0x18, 0x32, 0x19, 0x1a, 
-    0x03, 0x37, 0x4f, 0x50, 0x5a, 0x6d, 0x3d, 0x39, 0x35, 0x22, 
-    0x37, 0x34, 0x06, 0x0d, 0x0e, 0xff, 0xe0, 0xc0, 0xc1, 0x86, 
-    0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x57, 0x5a, 0x5b, 0x5c, 
-    0xd3, 0xe0, 0xff
-};
-
-const unsigned char data[] = {
-    0x00, 0x01, 0x00, 0x10, 0x01, 0x11, 0x75, 0x36, 0x01, 0x97, 
-    0x0f, 0x40, 0xbb, 0x9c, 0x57, 0x80, 0x34, 0x02, 0x88, 0x0a, 
-    0x40, 0xa0, 0x02, 0xb7, 0x01, 0x00, 0x04, 0xc8, 0x96, 0x3d, 
-    0x89, 0x90, 0x2c, 0x00, 0x00, 0x88, 0x00, 0xa0, 0x78, 0x00, 
-    0x04, 0x00, 0xff
-};
-
-/*
-const unsigned char reg[] = {
-    0xff, 0x11, 0x12, 0x17, 0x18, 0x32, 0x19, 0x1a, 0x03, 0x37,
-    0x4f, 0x50, 0x5a, 0x6d, 0x3d, 0x39, 0x35, 0x22, 0x37, 0x34,
-    0x06, 0x0d, 0x0e, 0xff, 0xe0, 0xc0, 0xc1, 0x86, 0x50, 0x51,
-    0x52, 0x53, 0x54, 0x55, 0x57, 0x5a, 0x5b, 0x5c, 0xd3, 0xe0,
-    0xff
-};
-
-const unsigned char data[] = {
-    0x01, 0x01, 0x00, 0x11, 0x75, 0x36, 0x01, 0x97, 0x0f, 0x40,
-    0xbb, 0x9c, 0x57, 0x80, 0x34, 0x02, 0x88, 0x0a, 0x40, 0xa0,
-    0x02, 0xb7, 0x01, 0x00, 0x04, 0xc8, 0x96, 0x3d, 0x89, 0x90,
-    0x2c, 0x00, 0x00, 0x88, 0x00, 0xa0, 0x78, 0x00, 0x04, 0x00,
-    0xff
-};
-*/
-
-
 uint8_t rxBuffer1[BUFFER_SIZE_R];
 uint8_t rxBuffer2[BUFFER_SIZE_R];
 
@@ -81,11 +22,111 @@ volatile uint8_t * processBufferT = NULL;      // Buffer whose data is read to b
 
 volatile uint8_t bufferFullR = 0;              // Flag to indicate that buffer is ready
 
+void initDMA1Ch2(){
+// Reset DMA1 Channel 2
+    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
+    DMA1_Channel2->CCR  &= ~(0xFFFFFFFF);
+    DMA1_Channel2->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b10) |   // Priority is set to medium
+                            _VAL2FLD(DMA_CCR_MINC, 0b1) | // memory address updates after every reception
+                            _VAL2FLD(DMA_CCR_CIRC, 0b1) | // DMA NBYTE count will update to declared value
+                            _VAL2FLD(DMA_CCR_DIR, 0b0) |  // Peripheral to memory transfer
+                            _VAL2FLD(DMA_CCR_MSIZE, 0b00) | // Set to byte length
+                            _VAL2FLD(DMA_CCR_PSIZE, 0b00)   // Set to byte length
+                            );
+    
+    // Set DMA source and destination addresses.
+    // Source: Address of the data from peripheral
+    DMA1_Channel2->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &(SPI1->DR));
+
+    // DEST.: Address of the current buffer in use in memory
+    DMA1_Channel2->CMAR = _VAL2FLD(DMA_CMAR_MA, (uint32_t) &currentBufferR);
+
+    // Set DMA data transfer length (# of samples)
+    DMA1_Channel2->CNDTR |= _VAL2FLD(DMA_CNDTR_NDT, 3840); // # pix per row * pixel width * # rows : 640 * 2 * 3
+    
+    // Select the 1st option for mux to channel 2
+    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 1);
+
+    // Enable interrupt bit for channel 2
+    DMA1_Channel2->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
+
+    // Enable DMA1 channel.
+    DMA1_Channel2->CCR  |= DMA_CCR_EN;
+
+    // Enable the interrupt for DMA1 Channel2
+    NVIC->ISER[0] |= (1<<DMA1_Channel2_IRQn);
+}
+
+void initDMA2Ch2(){
+// Reset DMA1 Channel 2
+    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
+    DMA1_Channel2->CCR  &= ~(0xFFFFFFFF);
+    DMA1_Channel2->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b11) |   // Priority is set to high
+                            _VAL2FLD(DMA_CCR_MINC, 0b1) | // memory address updates after every transmission
+                            _VAL2FLD(DMA_CCR_CIRC, 0b1) | // DMA NBYTE count will update to declared value
+                            _VAL2FLD(DMA_CCR_DIR, 0b1) |  // Peripheral to memory transfer
+                            _VAL2FLD(DMA_CCR_MSIZE, 0b00) | // Set to byte length
+                            _VAL2FLD(DMA_CCR_PSIZE, 0b00)   // Set to byte length
+                            );
+    
+    // Set DMA source and destination addresses.
+    // Source: Address of the data from memory
+    DMA1_Channel2->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &currentBufferT);
+
+    // DEST.: Address of the SPI3 data register
+    DMA1_Channel2->CMAR = _VAL2FLD(DMA_CMAR_MA, (uint32_t) &(SPI3->DR));
+
+    // Set DMA data transfer length (# of samples)
+    DMA1_Channel2->CNDTR |= _VAL2FLD(DMA_CNDTR_NDT, 1); // # pix per row * pixel width * # rows : 640 * 2 * 3
+    
+    // Select the 3rd option for mux to channel 2
+    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 3);
+
+    // Enable interrupt bit for channel 2
+    DMA1_Channel2->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
+
+    // Enable DMA1 channel.
+    DMA1_Channel2->CCR  |= DMA_CCR_EN;
+
+    // Enable the interrupt for DMA1 Channel2
+    NVIC->ISER[0] |= (1<<DMA1_Channel2_IRQn);
+}
+
+// Make a new file for the processing stuff
+
+uint8_t grayscaleConversion(uint16_t pixel) {
+    // Extract RGB components from the 16-bit pixel (RGB565 format)
+    uint8_t red = (pixel & 0xF800) >> 11;      // Top 5 bits
+    uint8_t green = (pixel & 0x07E0) >> 5;     // Middle 6 bits
+    uint8_t blue = pixel & 0x001F;             // Bottom 5 bits
+
+    // Scale the values to 8-bit range
+    red = (red * 255) / 31;
+    green = (green * 255) / 63;
+    blue = (blue * 255) / 31;
+
+    // Compute the grayscale value using standard formula
+    return (red * 30 + green * 59 + blue * 11) / 100;
+}
+
+void processData(void){
+    if (bufferFullR && processBufferR){
+        for (int i = 0; i < BUFFER_SIZE_R; i += PIXEL_BYTES){
+            uint16_t pixel = (processBufferR[i] << 8) | processBufferR[i+1];
+        }
+        bufferFullR = 0; // Clear flag after processing
+        processBufferR = NULL; // Reset buffer pointer
+    }
+}
+
 int main(void){
 
     // Buffers for PLL initialization
     configureFlash();
     configureClock();
+
+    // Enable interrupts globally
+    __enable_irq();
 
     // Enable the GPIO ports
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOAEN, 1);
@@ -124,18 +165,13 @@ int main(void){
     GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // MOSI PA7
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
 
-    initSPI(SPI1, 4, 0, 0);
+    initSPI(SPI1, 4, 0, 0, true);
 
     ////////////////////////////////
     // DMA configuration
     ////////////////////////////////
 
-    // Turn on DMA controller in RCC
-   // RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
-   // RCC->AHB1ENR |= (RCC_AHB1ENR_DMA2EN);
-
-   // init(DMA1_Channel1_BASE, SPI1, true, rxBuffer1);
-   // init(DMA2_Channel2_BASE, SPI3, false, txBuffer1);
+    //RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
 
     ////////////////////////////
     // SPI Transmission
@@ -144,17 +180,17 @@ int main(void){
     digitalWrite(PA8, 1);
     volatile uint16_t rgb565;
     
+    // temporary spi communication in core for rn 
     while(1){  
         digitalWrite(PA8, 0);
         spiSendReceive(SPI1, 0x3d);
         rgb565 = spiSendReceive(SPI1, 0x00);
-        printf("RGB565 current value is: %h\n", rgb565);
+        printf("RGB565 current value is: %d\n", rgb565);
         digitalWrite(PA8, 1);
     }
 
 }
 
-/*
 // Interrupt handler for DMA1Channel2 for RECEPTION
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
@@ -164,44 +200,18 @@ void DMA1_Channel2_IRQHandler(void) {
         if (currentBufferR == rxBuffer1) {
             processBufferR = rxBuffer1;      // Assign the filled buffer for processing
             currentBufferR = rxBuffer2;      // Switch DMA to the second buffer
-            DMA1_Channel2->CMAR = (uint32_t)rxBuffer2;
+            DMA1_Channel2->CMAR = (uint32_t)&rxBuffer2;
         } else {
             processBufferR = rxBuffer2;
             currentBufferR = rxBuffer1;
-            DMA1_Channel2->CMAR = (uint32_t)rxBuffer1;
+            DMA1_Channel2->CMAR = (uint32_t)&rxBuffer1;
         }
 
         bufferFullR = 1; // Signal processor to process the buffer
     }
 }
 
-*/
 
 
-uint8_t grayscaleConversion(uint16_t pixel) {
-    // Extract RGB components from the 16-bit pixel (RGB565 format)
-    uint8_t red = (pixel & 0xF800) >> 11;      // Top 5 bits
-    uint8_t green = (pixel & 0x07E0) >> 5;     // Middle 6 bits
-    uint8_t blue = pixel & 0x001F;             // Bottom 5 bits
-
-    // Scale the values to 8-bit range
-    red = (red * 255) / 31;
-    green = (green * 255) / 63;
-    blue = (blue * 255) / 31;
-
-    // Compute the grayscale value using standard formula
-    return (red * 30 + green * 59 + blue * 11) / 100;
-}
-
-/*
-void processData(void){
-    if (bufferFullR && processBufferR){
-        for (int i = 0; i < BUFFER_SIZE_R; i += PIXEL_BYTES){
-            uint16_t pixel = (processBufferR[i] << 8) | processBufferR[i+1];
-
-        }
-    }
-}
 
 
-*/
