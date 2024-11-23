@@ -32,4 +32,7 @@ void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receive);
  *    -- return: the character received over SPI */
 char spiSendReceive(SPI_TypeDef * SPIx, char send);
 
+/* Compacts SPI transaction into a function */
+void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char cmd);
+
 #endif

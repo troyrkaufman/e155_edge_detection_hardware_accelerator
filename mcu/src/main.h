@@ -15,8 +15,21 @@
 #define BUFFER_SIZE_R 3840
 #define BUFFER_SIZE_T 1
 #define PIXEL_BYTES 2
+
 #define I2C_SCL PA9
 #define I2C_SDA PA10
+
+// SPI1 Pins
+#define SCLK1 PA5
+#define MOSI1 PB5
+#define MISO1 PA6
+#define CE1   PA8
+
+// SPI3 Pins
+#define SCLK2 PB3
+#define MOSI2 PA7
+#define MISO2 PB4
+#define CE2   PB1
 
 const unsigned char reg[] = {
     0xff, 0x11, 0x12, 0xDA, 0xC2, 0x17, 0x18, 0x32, 0x19, 0x1a, 
