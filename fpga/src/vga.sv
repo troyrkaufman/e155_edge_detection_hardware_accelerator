@@ -11,12 +11,11 @@ module vga (
     b
 );
   logic [9:0] x, y;
-  //   logic idk;
   vgaPll pll (
       .ref_clk_i(clk),
       .rst_n_i(nrst),
-      .outcore_o(vgaClk),
-      .outglobal_o()
+      .outcore_o(),
+      .outglobal_o(vgaClk)
   );
 
   vgaController vgaCont (
@@ -30,9 +29,12 @@ module vga (
       y
   );
 
-  always_comb begin
-    r = x[3:0];
-    g = x[7:4];
-    b = {x[9:8], 2'b00};
-  end
+  videoGen videoGen (
+      vgaClk,
+      x,
+      y,
+      r,
+      g,
+      b
+  );
 endmodule

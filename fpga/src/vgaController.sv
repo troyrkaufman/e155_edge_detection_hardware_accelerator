@@ -36,8 +36,8 @@ module vgaController #(
     end
   end
 
-  assign hSync  = ~( (hCount >= (HACTIVE + HFP)) & (hCount < (HACTIVE + HFP + HSYNC)) );
-  assign vSync  = ~( (vCount >= (VACTIVE + VFP)) & (vCount < (VACTIVE + VFP + VSYNC)) );
+  assign hSync  = ~((hCount >= (HACTIVE + HFP)) & (hCount < (HACTIVE + HFP + HSYNC)));
+  assign vSync  = ~((vCount >= (VACTIVE + VFP)) & (vCount < (VACTIVE + VFP + VSYNC)));
   assign syncB  = 1'b0;
   assign blankB = hSync & vSync;
 
