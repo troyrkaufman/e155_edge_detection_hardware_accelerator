@@ -7,13 +7,20 @@
 #include <stdint.h>
 #include <stm32l432xx.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define READ_ADDRESS 0x61
 
 #define BUFFER_SIZE_R 1280
 #define BUFFER_SIZE_T 640
 
-void initDMA(DMA_Channel_TypeDef * DMAx, SPI_TypeDef * SPIx, bool receiveDMA, uint8_t buffer);
+void initDMA1Ch2(void);
+
+void initDMA1Ch3(void);
+
+void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len);
+
+void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * dest, uint32_t len);
 
 #endif
 

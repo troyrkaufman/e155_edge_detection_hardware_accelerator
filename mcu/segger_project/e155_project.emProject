@@ -64,6 +64,8 @@
       <file file_name="../src/main.c" />
       <file file_name="../src/main.h" />
       <file file_name="../lib/STM32L432KC.h" />
+      <file file_name="../lib/STM32L432KC_DMA.c" />
+      <file file_name="../lib/STM32L432KC_DMA.h" />
       <file file_name="../lib/STM32L432KC_FLASH.c" />
       <file file_name="../lib/STM32L432KC_FLASH.h" />
       <file file_name="../lib/STM32L432KC_GPIO.c" />

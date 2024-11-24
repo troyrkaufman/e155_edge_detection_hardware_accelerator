@@ -5,7 +5,7 @@
 // Description: This C file creates the initSPI and spiSendReceive functions
 
 #include "STM32L432KC_SPI.h"
-#include "sTM32L432KC_GPIO.h"
+#include "STM32L432KC_GPIO.h"
 
 void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
 
@@ -29,14 +29,12 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRF, 0b0);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRXTH, 0b1);
     
-    SPIx->CR2 &= ~SPI_CR2_NSSP;
+    //SPIx->CR2 |= SPI_CR2_NSSP;
 
-    /*// DMA request logic
-    if (receive == true){
-        SPIx->CR2 |= _VAL2FLD(SPI_CR2_RXDMAEN, 1);
-    } else {
-        SPIx->CR2 |= _VAL2FLD(SPI_CR2_TXDMAEN, 1);
-    } */
+    //set software slave managment
+    SPI1->CR1|=SPI_CR1_SSM|SPI_CR1_SSI;
+
+    SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
 
     SPIx->CR1 |= SPI_CR1_SPE;
 }
@@ -63,7 +61,7 @@ void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char cmd){
     // Assert NSS (slave select)
     //GPIOA->ODR &= (1<<~gpioNum); // Pull NSS low PA8
     spiSendReceive(SPIx, cmd);
-    spiSendReceive(SPIx, cmd);
+    spiSendReceive(SPIx, 0x00);
     digitalWrite(gpioNum, 1);
     //GPIOA->ODR |= (1<<gpioNum); // Pull NSS low PA8
 }
