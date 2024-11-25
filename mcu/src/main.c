@@ -119,17 +119,19 @@ int main(void){
 
 
     
-    while(1){
-    digitalWrite(NSS1, 0);
-    spiTransaction(SPI1, PA8, 0x3d);
-    digitalWrite(NSS1, 1);
-    }
+    //while(1){
+    //digitalWrite(NSS1, 0);
+    //spiTransaction(SPI1, PA8, 0x3d);
+    //digitalWrite(NSS1, 1);
+    //}
     
 
     initDMA1Ch2();
     initDMA1Ch3();
 
+    //digitalWrite(NSS1, 1);
     //GPIOB->ODR &= ~(1<<NSS1); // Pull NSS low PA8
+    digitalWrite(PA8, 0);
     spi_receive_dma(SPI1, currentBufferR, 40);
     spi_transfer_dma(SPI1, regcnfgr, 40);
     
@@ -148,7 +150,8 @@ int main(void){
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
-        digitalWrite(NSS1, 1); // Pull NSS HIGH PB0
+        //digitalWrite(NSS1, 1); // Pull NSS HIGH PB0
+        digitalWrite(PA8, 1);
 
         // Update buffers
         if (currentBufferR == rxBuffer1) {
@@ -163,6 +166,7 @@ void DMA1_Channel2_IRQHandler(void) {
 
         bufferFullR = 1; // Signal processor to process the buffer
     }
+    digitalWrite(PA8, 0);
 }
 
 /*
