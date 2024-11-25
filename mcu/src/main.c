@@ -93,7 +93,7 @@ int main(void){
     //pinMode(PA7, GPIO_ALT);    // MOSI We'll use PA7 in reality but for now we'll use PB
     pinMode(PB5, GPIO_ALT);    // MOSI
     pinMode(PA6, GPIO_ALT);    // MISO
-    //pinMode(PA8, GPIO_OUTPUT); // CE
+    pinMode(PA8, GPIO_OUTPUT); // CE
     pinMode(PB0, GPIO_ALT); // NSS 
 
     // Designate the SPI pins for MCU and FPGA communication
@@ -108,29 +108,30 @@ int main(void){
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
     GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL0, 5); // NSS PB0
 
-    initSPI(SPI1, 4, 0, 0, true);
+    initSPI(SPI1, 7, 0, 0, true);
 
     ////////////////////////////////
     // DMA configuration
     ////////////////////////////////
     // Enable DMA Channels
-    //RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
-    //RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
+    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
+    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
 
 
-    //digitalWrite(PA8, 0);
+    
     while(1){
-    spiTransaction(SPI1, PA8, 0x3c);
+    digitalWrite(NSS1, 0);
+    spiTransaction(SPI1, PA8, 0x3d);
+    digitalWrite(NSS1, 1);
     }
-    //digitalWrite(PA8, 1);
+    
 
     initDMA1Ch2();
     initDMA1Ch3();
 
-
-
+    //GPIOB->ODR &= ~(1<<NSS1); // Pull NSS low PA8
+    spi_receive_dma(SPI1, currentBufferR, 40);
     spi_transfer_dma(SPI1, regcnfgr, 40);
-    spi_receive_dma(SPI1, currentBufferR, 80);
     
     ////////////////////////////////
     // Main Loop
@@ -147,6 +148,7 @@ int main(void){
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
+        digitalWrite(NSS1, 1); // Pull NSS HIGH PB0
 
         // Update buffers
         if (currentBufferR == rxBuffer1) {
