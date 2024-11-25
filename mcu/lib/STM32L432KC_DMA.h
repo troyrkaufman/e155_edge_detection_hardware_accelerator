@@ -11,9 +11,6 @@
 
 #define READ_ADDRESS 0x61
 
-#define BUFFER_SIZE_R 1280
-#define BUFFER_SIZE_T 640
-
 void initDMA1Ch2(void);
 
 void initDMA1Ch3(void);

@@ -27,8 +27,6 @@ uint8_t txBuffer2[BUFFER_SIZE_T];
 
  uint8_t bufferFullR = 0;              // Flag to indicate that buffer is ready
 
-// Make a new file for the processing stuff
-
 uint8_t grayscaleConversion(uint16_t pixel) {
     // Extract RGB components from the 16-bit pixel (RGB565 format)
     uint8_t red = (pixel & 0xF800) >> 11;      // Top 5 bits
@@ -80,6 +78,7 @@ int main(void){
     ////////////////////////////////
     
     init_I2C();
+    digitalWrite(PA8, 1);
 
     for (volatile int i = 0; i < LENGTH; i++){
       write_I2C(ADDR, reg[i], data[i]);
@@ -115,14 +114,24 @@ int main(void){
     // DMA configuration
     ////////////////////////////////
     // Enable DMA Channels
-    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
-    RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
+    //RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
+    //RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
+
+
+    //digitalWrite(PA8, 0);
+    while(1){
+    spiTransaction(SPI1, PA8, 0x3c);
+    }
+    //digitalWrite(PA8, 1);
 
     initDMA1Ch2();
     initDMA1Ch3();
 
-    spi_receive_dma(SPI1, currentBufferR, 3840);
+
+
     spi_transfer_dma(SPI1, regcnfgr, 40);
+    spi_receive_dma(SPI1, currentBufferR, 80);
+    
     ////////////////////////////////
     // Main Loop
     ////////////////////////////////
@@ -154,6 +163,14 @@ void DMA1_Channel2_IRQHandler(void) {
     }
 }
 
+/*
+void DMA1_Channel3_IRQHandler(void){
+  if (DMA1->ISR & DMA_ISR_TCIF3) {   // Transfer Complete Interrupt
+        DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
+
+  }
+}
+*/
 
 
 
