@@ -24,7 +24,6 @@ uint8_t txBuffer2[BUFFER_SIZE_T];
  uint8_t * currentBufferT = txBuffer1; // ACtive DMA buffer receiving processed data
  uint8_t * transmitBufferT = NULL;      // Buffer whose data is read to be sent over SPI
 
-
  uint8_t bufferFullR = 0;              // Flag to indicate that buffer is ready
 
 uint8_t grayscaleConversion(uint16_t pixel) {
@@ -72,6 +71,9 @@ int main(void){
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOAEN, 1);
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOBEN, 1);
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOCEN, 1);
+    RCC->APB2ENR |= _VAL2FLD(RCC_APB2ENR_TIM15EN, 1);
+
+    initTIM(TIM15);
 
     ////////////////////////////////
     // I2C configuration
@@ -81,6 +83,9 @@ int main(void){
     //digitalWrite(PA8, 1);
 
     for (volatile int i = 0; i < LENGTH; i++){
+      if (i == 3) {
+        delay_millis(TIM15, 100);
+      }
       write_I2C(ADDR, reg[i], data[i]);
     }
 
@@ -119,18 +124,16 @@ int main(void){
 
 
     
-    //while(1){
+   // while(1){
     
    // spiTransaction(SPI1, PA8, 0x3d);
     
    // }
-    
+   
 
     initDMA1Ch2();
     initDMA1Ch3();
 
-    //digitalWrite(NSS1, 1);
-    //GPIOB->ODR &= ~(1<<NSS1); // Pull NSS low PA8
     digitalWrite(PA8, 0);
     spi_receive_dma(SPI1, currentBufferR, 40);
     spi_transfer_dma(SPI1, regcnfgr, 40);
@@ -150,7 +153,6 @@ int main(void){
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
-        //digitalWrite(NSS1, 1); // Pull NSS HIGH PB0
         digitalWrite(PA8, 1);
 
         // Update buffers
@@ -164,7 +166,7 @@ void DMA1_Channel2_IRQHandler(void) {
             DMA1_Channel2->CMAR = (uint32_t)&rxBuffer1;
         }
 
-        bufferFullR = 1; // Signal processor to process the buffer
+        bufferFullR = 1; // Flag that allows core to process the buffer
     }
     digitalWrite(PA8, 0);
 }
