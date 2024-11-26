@@ -58,15 +58,15 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send){
 }
 
 void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char cmd){
-    //digitalWrite(gpioNum, 0);
+    digitalWrite(gpioNum, 0);
     // Assert NSS (slave select)
     //GPIOA->ODR &= (1<<~gpioNum); // Pull NSS low PA8
     spiSendReceive(SPIx, cmd);
     spiSendReceive(SPIx, 0x00);
-    spiSendReceive(SPIx, 0x00);
     //spiSendReceive(SPIx, 0x00);
     //spiSendReceive(SPIx, 0x00);
     //spiSendReceive(SPIx, 0x00);
-    //digitalWrite(gpioNum, 1);
+    //spiSendReceive(SPIx, 0x00);
+    digitalWrite(gpioNum, 1);
     //GPIOA->ODR |= (1<<gpioNum); // Pull NSS low PA8
 }

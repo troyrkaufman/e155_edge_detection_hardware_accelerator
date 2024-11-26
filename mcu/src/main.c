@@ -78,7 +78,7 @@ int main(void){
     ////////////////////////////////
     
     init_I2C();
-    digitalWrite(PA8, 1);
+    //digitalWrite(PA8, 1);
 
     for (volatile int i = 0; i < LENGTH; i++){
       write_I2C(ADDR, reg[i], data[i]);
@@ -120,10 +120,10 @@ int main(void){
 
     
     //while(1){
-    //digitalWrite(NSS1, 0);
-    //spiTransaction(SPI1, PA8, 0x3d);
-    //digitalWrite(NSS1, 1);
-    //}
+    
+   // spiTransaction(SPI1, PA8, 0x3d);
+    
+   // }
     
 
     initDMA1Ch2();
