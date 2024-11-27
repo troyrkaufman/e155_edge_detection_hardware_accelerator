@@ -9,11 +9,11 @@ Date: 11/12/24
 #include "main.h"
 
 
-uint8_t rxBuffer1[BUFFER_SIZE_R];
-uint8_t rxBuffer2[BUFFER_SIZE_R];
+uint8_t rxBuffer1[BUFFER_SIZE_R] __attribute__((section(".sram1_data")));
+uint8_t rxBuffer2[BUFFER_SIZE_R] __attribute__((section(".sram1_data")));
 
-uint8_t txBuffer1[BUFFER_SIZE_T];
-uint8_t txBuffer2[BUFFER_SIZE_T];
+uint8_t txBuffer1[BUFFER_SIZE_T] __attribute__((section(".sram1_data")));
+uint8_t txBuffer2[BUFFER_SIZE_T] __attribute__((section(".sram1_data")));
 
 // DMA1 Channels 2 and 3
  uint8_t * currentBufferR = rxBuffer1; // Active DMA buffer 
@@ -84,7 +84,7 @@ int main(void){
 
     for (volatile int i = 0; i < LENGTH; i++){
       if (i == 3) {
-        delay_millis(TIM15, 100);
+        delay_millis(TIM15, 5);
       }
       write_I2C(ADDR, reg[i], data[i]);
     }
@@ -99,7 +99,7 @@ int main(void){
     pinMode(PB5, GPIO_ALT);    // MOSI
     pinMode(PA6, GPIO_ALT);    // MISO
     pinMode(PA8, GPIO_OUTPUT); // CE
-    pinMode(PB0, GPIO_ALT); // NSS 
+    //pinMode(PB0, GPIO_ALT); // NSS 
 
     // Designate the SPI pins for MCU and FPGA communication
     //pinMode(PB3, GPIO_ALT);    // SCK
@@ -111,7 +111,7 @@ int main(void){
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // SCK PA5
     GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // MOSI PA7 --> PB5 For now
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
-    GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL0, 5); // NSS PB0
+    //GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL0, 5); // NSS PB0
 
     initSPI(SPI1, 7, 0, 0, true);
 
@@ -122,13 +122,11 @@ int main(void){
     RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
     RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
 
-
     
-   // while(1){
     
-   // spiTransaction(SPI1, PA8, 0x3d);
-    
-   // }
+    //while(1){
+    //spiTransaction(SPI1, PA8, 0x3d); 
+    //}
    
 
     initDMA1Ch2();
@@ -152,9 +150,12 @@ int main(void){
 // Interrupt handler for DMA1Channel2 for RECEPTION
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
+        SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
-        digitalWrite(PA8, 1);
+        //SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
 
+        digitalWrite(PA8, 1);
+        delay_millis(TIM15, 1);
         // Update buffers
         if (currentBufferR == rxBuffer1) {
             processBufferR = rxBuffer1;      // Assign the filled buffer for processing
@@ -168,6 +169,8 @@ void DMA1_Channel2_IRQHandler(void) {
 
         bufferFullR = 1; // Flag that allows core to process the buffer
     }
+    //SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
+
     digitalWrite(PA8, 0);
 }
 
@@ -175,11 +178,19 @@ void DMA1_Channel2_IRQHandler(void) {
 void DMA1_Channel3_IRQHandler(void){
   if (DMA1->ISR & DMA_ISR_TCIF3) {   // Transfer Complete Interrupt
         DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
+        SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
 
+        digitalWrite(PA8, 1);
+
+        digitalWrite(PA8, 0);
+
+        SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
+
+        
   }
 }
-*/
 
+*/
 
 
 
