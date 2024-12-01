@@ -1,9 +1,17 @@
+`timescale 1 ns / 1 ns
 module spiTestbench ();
-  logic nrst, cs, clk, sdo, we;
+  logic nRst, cs, clk, sdo, we;
 
   logic [7:0] writeData;
 
-  spiReceive (.nrst(nrst), .cs(cs), .clk(clk), .sdi(sdo), .we(we), .writeData(writeData));
+  spiReceive sampleSpi (
+      .nRst(nRst),
+      .cs(cs),
+      .spiClk(clk),
+      .sdi(sdo),
+      .writeEnable(we),
+      .writeData(writeData)
+  );
 
   logic [7:0] sendData;
 
@@ -15,18 +23,29 @@ module spiTestbench ();
   end
 
   initial begin
-    nrst = 0;
+    nRst = 0;
     #27;
-    nrst = 1;
-    sendData = 'b10011100;
+    nRst = 1;
   end
 
-  always_ff @( posedge clk ) begin
-    sdo <= sendData[0];
-    sendData <= sendData >> 1;
+  int counter, nextCounter;
 
-    if (sendData == 'b0) begin
+  always_ff @(posedge clk) begin
+    if (we) begin
+      $display("Received data: %b", writeData);
       $finish;
+    end else if (~nRst) begin
+      $display("Reset");
+      cs <= 0;
+      sendData <= 'b10011101;
+      counter <= 8;
+    end else begin
+      cs <= 1;
+      counter <= nextCounter;
     end
   end
+
+  assign sdo = counter <= 7 ? sendData[counter] : 0;
+
+  assign nextCounter = counter - 1;
 endmodule
