@@ -13,7 +13,6 @@ module spiTestbench ();
       .writeData(writeData)
   );
 
-  logic [7:0] sendData;
 
   always begin
     clk = 1;
@@ -30,22 +29,22 @@ module spiTestbench ();
 
   int counter, nextCounter;
 
+  logic [23:0] sendData;
   always_ff @(posedge clk) begin
     if (we) begin
       $display("Received data: %b", writeData);
-      $finish;
     end else if (~nRst) begin
       $display("Reset");
       cs <= 0;
-      sendData <= 'b10011101;
-      counter <= 8;
-    end else begin
+      sendData <= 'b100111011111111100000000;
+      counter <= 24;
+    end else if (counter == 0)
+      $finish;
+    else begin
       cs <= 1;
-      counter <= nextCounter;
+      counter <= counter - 1;
     end
   end
 
-  assign sdo = counter <= 7 ? sendData[counter] : 0;
-
-  assign nextCounter = counter - 1;
+  assign sdo = counter < 24 ? sendData[counter] : 0;
 endmodule
