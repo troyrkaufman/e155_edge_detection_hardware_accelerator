@@ -50,11 +50,14 @@ void processData(void){
             uint16_t pixel = (processBufferR[i] << 8) | processBufferR[i+1]; // Combine bytes to get RGB565 pixel
             outputBuffer[i / PIXEL_BYTES] = grayscaleConversion(pixel);     // Convert to grayscale and store
         }
+        // toggle CE
+        digitalWrite(CE1, 1);
         // Update flags and pointers
         transmitBufferT = outputBuffer;  // Assign output buffer for SPI transmission
         currentBufferT = outputBuffer; // Switch to the new output buffer
         bufferFullR = 0; // Clear flag after processing
         processBufferR = NULL; // Reset buffer pointer
+        digitalWrite(CE1, 0);
     }
 }
 
@@ -63,7 +66,7 @@ int main(void){
     // Buffers for PLL initialization
     configureFlash();
     configureClock();
-
+ 
     // Enable interrupts globally
     __enable_irq();
 
@@ -113,28 +116,60 @@ int main(void){
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
     //GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL0, 5); // NSS PB0
 
-    initSPI(SPI1, 7, 0, 0, true);
+    // Initialize SPI1
+    initSPI(SPI1, 3, 0, 0, true);
+    digitalWrite(CE1, 1);
 
+    while(1){
+    uint8_t foo;
+    // Set Frame Capture
+    foo = spiTransactionRead(SPI1, CE1, 0x01, 0b001);
+
+    // Poll for Frame Completion
+    //uint8_t frame_done = 0x00;
+    uint32_t counter = 0; 
+    while (SPI1->DR != 0x0800){
+      //frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
+      spiTransactionRead(SPI1, CE1, 0x41, 0x00);
+      counter ++;
+      printf("%d transaction completed\n", counter);
+      //printf("%d frame_done value\n", frame_done);
+     // if (counter == 26530){
+     //   delay_millis(TIM15, 2000);
+     // }
+    }
+
+    // Retrieve Image Length
+    uint32_t fifo_length;
+    uint8_t byte0_length;
+    uint8_t byte1_length;
+    uint8_t byte2_length;
+    byte0_length = spiTransactionRead(SPI1, CE1, 0x42, 0x00);
+    byte1_length = spiTransactionRead(SPI1, CE1, 0x43, 0x00);
+    byte2_length = spiTransactionRead(SPI1, CE1, 0x44, 0x00);
+    fifo_length = (byte2_length << 16) | (byte1_length << 8) | byte0_length;
+
+    // Initate Burst Read and Extract  JPEG Data
+    for (volatile int i = 0; i < fifo_length; i++) {
+      spiTransaction(SPI1, PA8, 0x3d, 00); 
+    }
+   }
     ////////////////////////////////
     // DMA configuration
     ////////////////////////////////
     // Enable DMA Channels
     RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA1EN);
     RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
-
-    
-    
-    //while(1){
-    //spiTransaction(SPI1, PA8, 0x3d); 
-    //}
    
 
     initDMA1Ch2();
     initDMA1Ch3();
 
+    digitalWrite(PA8, 1);
     digitalWrite(PA8, 0);
     spi_receive_dma(SPI1, currentBufferR, 40);
     spi_transfer_dma(SPI1, regcnfgr, 40);
+   
     
     ////////////////////////////////
     // Main Loop
@@ -143,6 +178,11 @@ int main(void){
       while(1){
         if (bufferFullR) {
           processData();
+          initDMA1Ch3();
+          spi_transfer_dma(SPI1, regcnfgr, 40);
+          //DMA1_Channel3->CCR |= DMA_CCR_EN; // Stop SCLK packets
+          //spi_transfer_dma(SPI1, regcnfgr, 6);
+          //SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
         }
       }
 }
@@ -150,9 +190,13 @@ int main(void){
 // Interrupt handler for DMA1Channel2 for RECEPTION
 void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
-        SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
+       // SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
         //SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
+
+        //DMA1->IFCR = DMA_IFCR_CTCIF3; // Stop SCLK packets
+        DMA1_Channel3->CCR &= ~DMA_CCR_EN; // Stop SCLK packets
+
 
         digitalWrite(PA8, 1);
         delay_millis(TIM15, 1);
@@ -169,27 +213,25 @@ void DMA1_Channel2_IRQHandler(void) {
 
         bufferFullR = 1; // Flag that allows core to process the buffer
     }
-    //SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
-
-    digitalWrite(PA8, 0);
+    
+    //digitalWrite(PA8, 0);
 }
+
 
 /*
 void DMA1_Channel3_IRQHandler(void){
+  
   if (DMA1->ISR & DMA_ISR_TCIF3) {   // Transfer Complete Interrupt
-        DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
         SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
-
-        digitalWrite(PA8, 1);
-
-        digitalWrite(PA8, 0);
-
+        DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
+          digitalWrite(PA8, 1);
+         digitalWrite(PA8, 0);
         SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
+        spi_transfer_dma(SPI1, regcnfgr, 6);
 
         
   }
 }
-
 */
 
 

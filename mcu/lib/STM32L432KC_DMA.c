@@ -2,6 +2,7 @@
 // Source code for DMA peripheral
 
 #include "STM32L432KC_DMA.h"
+#include "STM32L432KC_GPIO.h"
 
 // Receives data from camera module
 void initDMA1Ch2(void){
@@ -39,10 +40,10 @@ void initDMA1Ch3(void){
     DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C3S, 0b0001);
 
     // Enable interrupt bit for channel 3
-   // DMA1_Channel3->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
+    //DMA1_Channel3->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
 
     // Enable the interrupt for DMA1 Channel3
-   // NVIC_EnableIRQ(DMA1_Channel3_IRQn);  // Enable DMA1 Channel 3 interrupt
+    //NVIC_EnableIRQ(DMA1_Channel3_IRQn);  // Enable DMA1 Channel 3 interrupt
 }
 
 void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
@@ -71,6 +72,9 @@ void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
 
     // Enable DMA1 channel.
     DMA1_Channel3->CCR  |= DMA_CCR_EN;
+
+    //digitalWrite(PA8, 1);
+    //digitalWrite(PA8, 0);
 }
 
 

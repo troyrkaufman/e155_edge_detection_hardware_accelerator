@@ -33,6 +33,8 @@ void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receive);
 char spiSendReceive(SPI_TypeDef * SPIx, char send);
 
 /* Compacts SPI transaction into a function */
-void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char cmd);
+void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd);
+
+uint8_t spiTransactionRead(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd);
 
 #endif
