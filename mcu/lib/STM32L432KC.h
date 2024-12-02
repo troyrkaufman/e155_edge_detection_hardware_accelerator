@@ -21,6 +21,20 @@
 #include "STM32L432KC_SPI.h"
 #include "STM32L432KC_I2C.h"
 #include "STM32L432KC_DMA.h"
+//#include "ov2640_updated.h"
+//#include "ArduCAM.h"
+//#include "sccb_bus.h"
+//#include "spi.h"
+
+/*
+../STM32L152/HARDWARE/ArduCAM/ArduCAM.c
+../STM32L152/HARDWARE/ArduCAM/ArduCAM.h
+../STM32L152/HARDWARE/ArduCAM/ov2640_updated.h
+../STM32L152/HARDWARE/I2C/sccb_bus.c
+../STM32L152/HARDWARE/I2C/sccb_bus.h
+../STM32L152/HARDWARE/SPI/spi.c
+../STM32L152/HARDWARE/SPI/spi.h
+*/
 
 // Global defines
 

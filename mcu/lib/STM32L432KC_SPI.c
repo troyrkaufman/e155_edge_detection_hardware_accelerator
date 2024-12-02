@@ -29,13 +29,9 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRF, 0b0);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRXTH, 0b1);
     
-    //SPIx->CR2 |= SPI_CR2_NSSP;
+    SPIx->CR2 &= ~SPI_CR2_NSSP;
 
-    //set software slave managment
-    //SPI1->CR1 &= ~SPI_CR1_SSM;
-    //SPI1->CR2 |= SPI_CR1_SSI;
-
-    SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
+    //SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
 
     SPIx->CR1 |= SPI_CR1_SPE;
 }
@@ -59,23 +55,15 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send){
 
 void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd){
     digitalWrite(gpioNum, 0);
-    // Assert NSS (slave select)
-    //GPIOA->ODR &= (1<<~gpioNum); // Pull NSS low PA8
     spiSendReceive(SPIx, addr);
     spiSendReceive(SPIx, cmd);
-    //spiSendReceive(SPIx, 0x00);
-    //spiSendReceive(SPIx, 0x00);
-    //spiSendReceive(SPIx, 0x00);
-    //spiSendReceive(SPIx, 0x00);
     digitalWrite(gpioNum, 1);
-    //GPIOA->ODR |= (1<<gpioNum); // Pull NSS low PA8
 }
 
 uint8_t spiTransactionRead(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd){
     uint8_t read;
     digitalWrite(gpioNum, 0);
     spiSendReceive(SPIx, addr);
-    //spiSendReceive(SPIx, cmd);
     read = spiSendReceive(SPIx, cmd);
     digitalWrite(gpioNum, 1);
     return read;

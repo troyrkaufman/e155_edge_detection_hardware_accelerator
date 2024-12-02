@@ -61,6 +61,14 @@ void processData(void){
     }
 }
 
+uint32_t readFifoLength(void){
+    uint8_t byte0_length, byte1_length, byte2_length;
+    byte0_length = spiTransactionRead(SPI1, CE1, 0x42, 0x00);
+    byte1_length = spiTransactionRead(SPI1, CE1, 0x43, 0x00);
+    byte2_length = spiTransactionRead(SPI1, CE1, 0x44, 0x00) & 0x7f;
+    return (byte2_length << 16) | (byte1_length << 8) | byte0_length & 0x07ffff;
+}
+
 int main(void){
 
     // Buffers for PLL initialization
@@ -69,7 +77,7 @@ int main(void){
  
     // Enable interrupts globally
     __enable_irq();
-
+  
     // Enable the GPIO ports
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOAEN, 1);
     RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOBEN, 1);
@@ -86,9 +94,9 @@ int main(void){
     //digitalWrite(PA8, 1);
 
     for (volatile int i = 0; i < LENGTH; i++){
-      if (i == 3) {
-        delay_millis(TIM15, 5);
-      }
+      //if (i == 3) {
+      //  delay_millis(TIM15, 5);
+     // }
       write_I2C(ADDR, reg[i], data[i]);
     }
 
@@ -105,52 +113,73 @@ int main(void){
     //pinMode(PB0, GPIO_ALT); // NSS 
 
     // Designate the SPI pins for MCU and FPGA communication
-    //pinMode(PB3, GPIO_ALT);    // SCK
+    pinMode(PB3, GPIO_ALT);    // SCK
     //pinMode(PB5, GPIO_ALT);    // MOSI
-    //pinMode(PB4, GPIO_ALT);    // MISO
-    //pinMode(PC15, GPIO_OUTPUT); // CE
+    pinMode(PB4, GPIO_ALT);    // MISO
+    pinMode(PC15, GPIO_OUTPUT); // CE
 
     // Give SPI pins proper ALT functions
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // SCK PA5
     GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5); // MOSI PA7 --> PB5 For now
     GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5); // MISO PA6
-    //GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL0, 5); // NSS PB0
 
     // Initialize SPI1
     initSPI(SPI1, 3, 0, 0, true);
     digitalWrite(CE1, 1);
 
-    while(1){
-    uint8_t foo;
-    // Set Frame Capture
-    foo = spiTransactionRead(SPI1, CE1, 0x01, 0b001);
+    uint8_t frame_done = 0x00;
 
+    while(1){
+    // Configure FIFO accordingly
+    //spiTransactionRead(SPI1, CE1, 0x84, 0x11); // Clear FIFO Done Flag
+    //delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x81, 0xFF); // 1 Frame to be Captured
+    //delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x83, 0x12);
+    //delay_millis(TIM15, 1);
+    ////spiTransactionRead(SPI1, CE1, , char cmd)
+    //spiTransactionRead(SPI1, CE1, 0x84, 0x10); // Reset Write Pointer
+    //delay_millis(TIM15, 1);
+    ////spiTransactionRead(SPI1, CE1, 0x07, 0x80); // Clear FIFO Done Flag
+    ////delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x87, 0x01); // Clear FIFO Done Flag
+    //delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x40, 0x73);
+    //delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x45, 0x73);
+    //delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x84, 0x02); // Start Capture
+    //delay_millis(TIM15, 1);
+    uint8_t foo = 0;
+    spiTransactionRead(SPI1, CE1, 0x81, 0x00);
+    delay_millis(TIM15, 1);
+    spiTransactionRead(SPI1, CE1, 0x85, 0x01);
+    delay_millis(TIM15, 1);
+    spiTransactionRead(SPI1, CE1, 0x87, 0x80);
+    delay_millis(TIM15, 1);
+    spiTransactionRead(SPI1, CE1, 0x87, 0x00);
+    delay_millis(TIM15, 1);
+    spiTransactionRead(SPI1, CE1, 0x84, 0x10);
+    delay_millis(TIM15, 1);
+    spiTransactionRead(SPI1, CE1, 0x84, 0x02);
+    //delay_millis(TIM15, 1);
     // Poll for Frame Completion
-    //uint8_t frame_done = 0x00;
-    uint32_t counter = 0; 
-    while (SPI1->DR != 0x0800){
-      //frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
-      spiTransactionRead(SPI1, CE1, 0x41, 0x00);
-      counter ++;
-      printf("%d transaction completed\n", counter);
-      //printf("%d frame_done value\n", frame_done);
-     // if (counter == 26530){
-     //   delay_millis(TIM15, 2000);
-     // }
+   
+   frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
+    while (frame_done != 0x08){
+      frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
+      //spiTransactionRead(SPI1, CE1, 0x43, 0x00);
+      //spiTransactionRead(SPI1, CE1, 0x44, 0x00);
+      //delay_millis(TIM15, 1);
+      //spiTransactionRead(SPI1, CE1, 0x42, 0x00);
+      //delay_millis(TIM15, 1);
     }
 
-    // Retrieve Image Length
-    uint32_t fifo_length;
-    uint8_t byte0_length;
-    uint8_t byte1_length;
-    uint8_t byte2_length;
-    byte0_length = spiTransactionRead(SPI1, CE1, 0x42, 0x00);
-    byte1_length = spiTransactionRead(SPI1, CE1, 0x43, 0x00);
-    byte2_length = spiTransactionRead(SPI1, CE1, 0x44, 0x00);
-    fifo_length = (byte2_length << 16) | (byte1_length << 8) | byte0_length;
+    uint32_t fifoLength = 0;
+    fifoLength = readFifoLength();
 
-    // Initate Burst Read and Extract  JPEG Data
-    for (volatile int i = 0; i < fifo_length; i++) {
+    // Initate Read and Extract JPEG Data
+    for (volatile int i = 0; i < fifoLength; i++) {
       spiTransaction(SPI1, PA8, 0x3d, 00); 
     }
    }
@@ -192,9 +221,7 @@ void DMA1_Channel2_IRQHandler(void) {
     if (DMA1->ISR & DMA_ISR_TCIF2) {   // Transfer Complete Interrupt
        // SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
         DMA1->IFCR |= DMA_IFCR_CTCIF2; // Clear the interrupt flag
-        //SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
 
-        //DMA1->IFCR = DMA_IFCR_CTCIF3; // Stop SCLK packets
         DMA1_Channel3->CCR &= ~DMA_CCR_EN; // Stop SCLK packets
 
 
@@ -214,7 +241,6 @@ void DMA1_Channel2_IRQHandler(void) {
         bufferFullR = 1; // Flag that allows core to process the buffer
     }
     
-    //digitalWrite(PA8, 0);
 }
 
 
@@ -233,6 +259,54 @@ void DMA1_Channel3_IRQHandler(void){
   }
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 <solution Name="e155_project" version="2" target="8">
   <configuration
     Name="Debug"
+    c_include_files=""
     c_preprocessor_definitions="DEBUG"
     debug_target_connection="J-Link"
     gcc_debugging_level="Level 3"
@@ -45,6 +46,12 @@
       project_directory=""
       project_type="Executable"
       target_reset_script="Reset();" />
+    <folder Name="ArduCam">
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
+      <file file_name="../STM32L152/HARDWARE/ArduCAM/ArduCAM.c" />
+      <file file_name="../STM32L152/HARDWARE/ArduCAM/ArduCAM.h" />
+      <file file_name="../STM32L152/HARDWARE/ArduCAM/ov2640_updated.h" />
+    </folder>
     <folder Name="CMSIS Files">
       <file file_name="STM32L4xx/Device/Include/stm32l4xx.h" />
       <file file_name="STM32L4xx/Device/Source/system_stm32l4xx.c">
@@ -53,6 +60,11 @@
           default_code_section=".init"
           default_const_section=".init_rodata" />
       </file>
+    </folder>
+    <folder Name="I2C">
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
+      <file file_name="../STM32L152/HARDWARE/I2C/sccb_bus.c" />
+      <file file_name="../STM32L152/HARDWARE/I2C/sccb_bus.h" />
     </folder>
     <folder Name="Script Files">
       <file file_name="STM32L4xx/Scripts/STM32L4xx_Target.js">
@@ -80,6 +92,11 @@
       <file file_name="../lib/STM32L432KC_TIM.h" />
       <file file_name="../lib/STM32L432KC_USART.c" />
       <file file_name="../lib/STM32L432KC_USART.h" />
+    </folder>
+    <folder Name="SPI">
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
+      <file file_name="../STM32L152/HARDWARE/SPI/spi.c" />
+      <file file_name="../STM32L152/HARDWARE/SPI/spi.h" />
     </folder>
     <folder Name="System Files">
       <file file_name="SEGGER_THUMB_Startup.s" />
