@@ -23,12 +23,39 @@ module top (
 
 
   pll50p35 vgaPll (
-    .ref_clk_i(oscClk),
-    .rst_n_i(nreset),
-    .outcore_o(mainClk),
-    .outglobal_o()
+      .ref_clk_i(oscClk),
+      .rst_n_i(nreset),
+      .outcore_o(mainClk),
+      .outglobal_o()
   );
 
-  
+  spramController spramCont (
+      .mainClk(mainClk),
+      .nreset(nreset),
+      .addressRead(spiData),
+      .addressWrite(spiData),
+      .writeData(spiData[11:10]),
+      .load(spiDone),
+      .vgaClk(vgaClk),
+      .outVal(outVal)
+  );
+
+  spiReceive #(12) spiRec (
+      .spiClk(spiClk),
+      .nreset(nreset),
+      .sdi(sdi),
+      .cs(ce),
+      .writeData(spiData),
+      .writeEnable(spiDone)
+  );
+
+  logic [1:0] outVal;
+  logic [11:0] spiData;
+  logic spiDone;
+
+  assign red   = outVal;
+  assign green = outVal;
+  assign blue  = outVal;
+
 
 endmodule
