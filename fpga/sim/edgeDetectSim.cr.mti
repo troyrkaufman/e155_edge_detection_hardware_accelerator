@@ -1,4 +1,11 @@
-/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv
+/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module spiTestbench
+
+Top level modules:
+	spiTestbench
+
+} {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module uPLogoRom
 
@@ -12,6 +19,13 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 Top level modules:
 	videoGen
 
+} {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module vga
+
+Top level modules:
+	vga
+
 } {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module vgaController
@@ -19,12 +33,12 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 Top level modules:
 	vgaController
 
-} {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv
+} {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
--- Compiling module vga
+-- Compiling module spiReceive
 
 Top level modules:
-	vga
+	spiReceive
 
 } {} {}} /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/top.sv {1 {vlog -work work -vopt -sv -stats=none /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/top.sv
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024

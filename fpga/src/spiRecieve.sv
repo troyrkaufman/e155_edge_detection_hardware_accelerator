@@ -18,7 +18,7 @@ module spiReceive #(
 
   spiState_t currentState;
 
-  always_ff @(posedge spiClk, posedge cs, nRst) begin : stateLogic
+  always_ff @(negedge spiClk, posedge cs, nRst) begin : stateLogic
     if (~nRst) currentState <= WAITING;
     else
       case (currentState)

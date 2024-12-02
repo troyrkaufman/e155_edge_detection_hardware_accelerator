@@ -1191,3 +1191,64 @@ run 10000
 #    Time: 290 ns  Iteration: 1  Instance: /spiTestbench
 # 1
 # Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Errors: 0, Warnings: 2
+# Compile of spiRecieve.sv was successful with warnings.
+# Compile of top.sv was successful with warnings.
+# Compile of uPLogoRom.sv was successful with warnings.
+# Compile of vga.sv was successful with warnings.
+# Compile of vgaController.sv was successful with warnings.
+# Compile of videoGen.sv was successful with warnings.
+# Compile of spiTestbench.sv was successful with warnings.
+# 7 compiles, 0 failed with no errors.
+# Project file /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf is write protected, data cannot be saved.
+# Unable to save project.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Error: (vsim-7) Failed to open ini file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" in read mode.
+# No such file or directory. (errno = ENOENT)
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (vopt-14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Warning: (14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Error: (vopt-7) Failed to open  file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/work/@_opt/_deps" in read mode.
+# ** Warning: (vopt-56) Problem with optimized design dependency file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/work/@_opt/_deps" - file open failed. (Code 12)
+# No such file or directory. (errno = ENOENT)
+# ** Fatal: (vopt-8) Problem while reading dependency file "_deps".
+# No such file or directory. (errno = ENOENT)
+# Vopt Compiler exiting
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=3, Warnings=3.
+# Break key hit
+quit -sim
+# Project file /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf is write protected, data cannot be saved.
+# Unable to save project.
+# End time: 13:50:29 on Dec 01,2024, Elapsed time: 3:39:59
+# Errors: 3, Warnings: 3
+# reading /home/anonymousvikram/.lscc/questasim/linux_x86_64/../modelsim.ini
+# Loading project edgeDetectSim
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim -voptargs=+acc work.spiTestbench
+# vsim -voptargs="+acc" work.spiTestbench 
+# Start time: 13:51:15 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# 
+# ** License Issue: License server does not support this feature (latticeqsim)
+# ** License Issue: Invalid host. (/home/anonymousvikram/.lscc/bin/lin64/../../license/license.dat)
+# ** Error: Failure to obtain a Verilog simulation license. Unable to checkout 'latticeqsim' license.
+# Error loading design
+# End time: 13:51:15 on Dec 01,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 3

@@ -1,0 +1,182 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11f vlog 2024.2 2024.05, May 20 2024
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 d/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/sim
+T_opt
+!s110 1733079075
+V2eg_WTdCLQSYl@RPM=Bdz1
+04 12 4 work spiTestbench fast 0
+=1-000ae431a4f1-674cb023-74b73-1c788
+R0
+!s12f OEM25U2 
+!s12b OEM100
+!s124 OEM100
+!s135 nogc
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2024.2;79
+vspiReceive
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z4 !s110 1733079059
+!i10b 1
+!s100 6ZYDk[K7LYF4IR0GmPRMN3
+I=KHO92WzTe<hg9jW@30PC2
+S1
+R1
+w1733078989
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv
+!i122 0
+L0 1 50
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2024.2;79
+r1
+!s85 0
+31
+Z7 !s108 1733079059.000000
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/spiRecieve.sv|
+!i113 0
+Z8 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+nspi@receive
+vspiTestbench
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv
+R3
+Z9 !s110 1733079060
+!i10b 1
+!s100 kMHfiboE?=68<`P:HAkST1
+IKM1bAX^BRD1Z5IW6Fz4KA0
+S1
+R1
+w1733077976
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv
+!i122 5
+L0 2 49
+R5
+R6
+r1
+!s85 0
+31
+!s108 1733079060.000000
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv|
+!i113 0
+R8
+R2
+nspi@testbench
+vuPLogoRom
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv
+R3
+R4
+!i10b 1
+!s100 Q1<Uo^B4VPd@zF8@5A>Y41
+IeW^1AB_zEgLmT66>XD`Rg0
+S1
+R1
+Z10 w1733065026
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv
+!i122 1
+L0 1 12
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/uPLogoRom.sv|
+!i113 0
+R8
+R2
+nu@p@logo@rom
+vvga
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv
+R3
+R4
+!i10b 1
+!s100 fK;lR5:iJ`62Ummjiz;JE2
+I=C@O6DX3m3AI59X3Hl;Lf0
+S1
+R1
+R10
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv
+!i122 2
+L0 1 15
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vga.sv|
+!i113 0
+R8
+R2
+vvgaController
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv
+R3
+R4
+!i10b 1
+!s100 NJb:<;BNZFih1ejzWaJza3
+IN;8CJFZeZ<hEXfKYMZIR70
+S1
+R1
+R10
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv
+!i122 3
+L0 1 44
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/vgaController.sv|
+!i113 0
+R8
+R2
+nvga@controller
+vvideoGen
+2/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/videoGen.sv
+R3
+R9
+!i10b 1
+!s100 mVEaggg4kojRLQzK=g<JZ3
+IeoH@7=^EDIUIKaEi11`ZT2
+S1
+R1
+R10
+8/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/videoGen.sv
+F/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/videoGen.sv
+!i122 4
+L0 1 11
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/videoGen.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/src/videoGen.sv|
+!i113 0
+R8
+R2
+nvideo@gen
