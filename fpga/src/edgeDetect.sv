@@ -1,6 +1,6 @@
 module edgeDetect (
-  input logic clk, nreset,
-  input logic spiDone,
+  // input logic clk, nreset,
+  input logic inputValid,
   input logic [3:0] pixelData [3][3],
   output logic [1:0] edgeVal,
   output logic edgeValValid
@@ -17,6 +17,16 @@ module edgeDetect (
 
   logic [6:0] sqrtVal; // max val is sqrt(7200) = 85 = 7'b1010101
 
+  sqrtRom sqrtRom (
+    .squareSum(squareSum),
+    .sqrtVal(sqrtVal)
+  );
+
+  bitCompress bitCompress (
+    .inVal(sqrtVal),
+    .outVal(edgeVal)
+  );
+
   always_comb begin : rowColCalcs
     row1Val = pixelData[0][0] + pixelData[0][1] << 2 + pixelData[0][2];
     row2Val = pixelData[1][0] + pixelData[1][1] << 2 + pixelData[1][2];
@@ -32,9 +42,7 @@ module edgeDetect (
     colSquare = colDiff * colDiff;
 
     squareSum = rowSquare + colSquare;
-    sqrtVal = sqrt(squareSum); // write custom module
   end
 
-  
-  
+  assign edgeValValid = inputValid;
 endmodule
