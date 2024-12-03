@@ -4,7 +4,7 @@ module spiReceive #(
     input logic spiClk,
     nreset,
     input logic sdi,
-    cs,
+    ncs,
     output logic [messageBits-1:0] writeData,
     output logic writeEnable
 );
@@ -18,13 +18,13 @@ module spiReceive #(
 
   spiState_t currentState;
 
-  always_ff @(negedge spiClk, posedge cs, nreset) begin : stateLogic
+  always_ff @(negedge spiClk, negedge ncs, negedge nreset) begin : stateLogic
     if (~nreset) currentState <= WAITING;
     else
       case (currentState)
-        WAITING: currentState <= cs ? RECEIVING : WAITING;
+        WAITING: currentState <= ncs ? RECEIVING : WAITING;
         RECEIVING: currentState <= bitCounter == 'hF ? DONE : RECEIVING;
-        DONE: currentState <= cs ? RECEIVING : WAITING;
+        DONE: currentState <= ncs ? RECEIVING : WAITING;
         default: currentState <= WAITING;
       endcase
   end

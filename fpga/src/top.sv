@@ -12,6 +12,9 @@ module top (
     blue
 );
   logic oscClk, mainClk, vgaClk;
+  logic [1:0] outVal;
+  logic [11:0] spiData;
+  logic spiDone;
 
   HSOSC #(
       .CLKHF_DIV("0b10")
@@ -48,10 +51,6 @@ module top (
       .writeData(spiData),
       .writeEnable(spiDone)
   );
-
-  logic [1:0] outVal;
-  logic [11:0] spiData;
-  logic spiDone;
 
   assign red   = outVal;
   assign green = outVal;
