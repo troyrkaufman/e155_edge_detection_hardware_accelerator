@@ -61,6 +61,11 @@
           default_const_section=".init_rodata" />
       </file>
     </folder>
+    <folder Name="delay">
+      <configuration Name="Debug" build_exclude_from_build="Yes" />
+      <file file_name="../STM32L152/HARDWARE/delay/delay.c" />
+      <file file_name="../STM32L152/HARDWARE/delay/delay.h" />
+    </folder>
     <folder Name="I2C">
       <configuration Name="Debug" build_exclude_from_build="Yes" />
       <file file_name="../STM32L152/HARDWARE/I2C/sccb_bus.c" />
