@@ -56,7 +56,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l1xx_rcc.h"
+#include "stm32l432xx.h"
 
 /** @addtogroup STM32L1xx_StdPeriph_Driver
   * @{

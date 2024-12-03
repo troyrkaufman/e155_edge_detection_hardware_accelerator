@@ -1,4 +1,6 @@
 #include "sccb_bus.h"
+#include "../../STM32L1xxStdPeriph_Driver/inc/stm32l1xx_gpio.h"
+
  uint32_t ntime;
 
 /**
@@ -7,7 +9,7 @@
   * @retval None
   */
 void sccb_bus_init(void)
-{
+{       
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);	 
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;				 
@@ -20,6 +22,7 @@ void sccb_bus_init(void)
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	GPIO_SetBits(GPIOB,GPIO_Pin_10);						
 	SCCB_DATA_OUT;
+        
 }
 
 

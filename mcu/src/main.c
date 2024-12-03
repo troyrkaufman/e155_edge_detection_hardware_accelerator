@@ -154,12 +154,32 @@ int main(void) {
     // delay_millis(TIM15, 1);
     // spiTransactionRead(SPI1, CE1, 0x84, 0x02); // Start Capture
     // delay_millis(TIM15, 1);
+    //spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
+    //spiTransactionRead(SPI1, CE1, 0x84, 0x11);    // Reset Fifo Read Pointer and Clear Done Bit
+
+    spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
+    spiTransactionRead(SPI1, CE1, 0x87, 0x00);    // Reset CPLD
 
     spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    // delay_millis(TIM15, 1);
     spiTransaction(SPI1, CE1, 0x3d, 0x00);
     spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    
+
+    spiTransactionRead(SPI1, CE1, 0x81, 0x00);    // Set to Capture 1 Frame
+  
+    while(frame_done !=  0x08){
+      frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
+      printf("Byte received %x\n", frame_done);
+    }
+
     spiTransaction(SPI1, CE1, 0x42, 0x00);
+
+
+    /*
+    spiTransaction(SPI1, CE1, 0x41, 0x00);
     delay_millis(TIM15, 1);
     spiTransaction(SPI1, CE1, 0x85, 0x00);
     delay_millis(TIM15, 1);
@@ -181,7 +201,7 @@ int main(void) {
     delay_millis(TIM15, 1);
     spiTransaction(SPI1, CE1, 0x48, 0x00);
     delay_millis(TIM15, 1);
-
+*/
     uint8_t foo = 0;
     spiTransactionRead(SPI1, CE1, 0x81, 0x00);    // Set to Capture 1 Frame
     delay_millis(TIM15, 1);
