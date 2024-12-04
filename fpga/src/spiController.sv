@@ -10,11 +10,11 @@ module spiController (
     output logic [8:0] spiYVal
 );
 
-  logic [3:0] pixelDataReg[3][3];
+  logic [ 3:0] pixelDataReg[3][3];
 
   logic [11:0] spiLine;
 
-  logic [1:0] modCounter;
+  logic [1:0] modCounter, nextModCounter;
 
   logic spiDone;
 
@@ -29,7 +29,11 @@ module spiController (
       .writeEnable(spiDone)
   );
 
-  typedef enum logic [1:0] { RECEIVING, DATA_DONE, WAIT_RESET } spiState_t;
+  typedef enum logic [1:0] {
+    RECEIVING,
+    DATA_DONE,
+    WAIT_RESET
+  } spiState_t;
 
   spiState_t spiState, nextSpiState;
 
@@ -42,7 +46,8 @@ module spiController (
     case (spiState)
       RECEIVING: nextSpiState = spiDone ? DATA_DONE : RECEIVING;
       DATA_DONE: nextSpiState = WAIT_RESET;
-      WAIT_RESET: nextSpiState = spiDone ? WAIT_RESET : RECEIVING; // this is to account for the SPI clock being much slower
+      WAIT_RESET:
+      nextSpiState = spiDone ? WAIT_RESET : RECEIVING; // this is to account for the SPI clock being much slower
       default: nextSpiState = RECEIVING;
     endcase
   end
@@ -69,16 +74,20 @@ module spiController (
   always_ff @(posedge mainClk, negedge nreset) begin : dataLogic
     if (~nreset) begin
       pixelDataReg <= '{default: 0};
-      modCounter <= 0;
+      modCounter   <= 0;
     end else if (spiState == DATA_DONE) begin
       pixelDataReg[0][modCounter] <= spiLine[11:8];
       pixelDataReg[1][modCounter] <= spiLine[7:4];
       pixelDataReg[2][modCounter] <= spiLine[3:0];
-      modCounter <= modCounter + 1;
+      modCounter <= nextModCounter;
+    end
+  end
 
-      if (modCounter == 3) begin
-        modCounter <= 0;
-      end
+  always_comb begin : modCounterLogic
+    if (spiXVal == 0) begin
+      nextModCounter = 0;
+    end else begin
+      nextModCounter = modCounter == 2 ? 0 : modCounter + 1;
     end
   end
 
