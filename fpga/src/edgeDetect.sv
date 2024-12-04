@@ -29,10 +29,8 @@ module edgeDetect (
 
   always_comb begin : rowColCalcs
     row1Val = pixelData[0][0] + pixelData[0][1] << 2 + pixelData[0][2];
-    row2Val = pixelData[1][0] + pixelData[1][1] << 2 + pixelData[1][2];
     row3Val = pixelData[2][0] + pixelData[2][1] << 2 + pixelData[2][2];
     col1Val = pixelData[0][0] + pixelData[1][0] << 2 + pixelData[2][0];
-    col2Val = pixelData[0][1] + pixelData[1][1] << 2 + pixelData[2][1];
     col3Val = pixelData[0][2] + pixelData[1][2] << 2 + pixelData[2][2];
 
     rowDiff = row1Val > row3Val ? row1Val - row3Val : row3Val - row1Val;
