@@ -16,18 +16,24 @@ module spiReceive #(
     DONE
   } spiState_t;
 
-  spiState_t currentState;
-
-  always_ff @(negedge spiClk, negedge ncs, negedge nreset) begin : stateLogic
-    if (~nreset) currentState <= WAITING;
-    else
-      case (currentState)
-        WAITING: currentState <= ncs ? RECEIVING : WAITING;
-        RECEIVING: currentState <= bitCounter == 'hF ? DONE : RECEIVING;
-        DONE: currentState <= ncs ? RECEIVING : WAITING;
-        default: currentState <= WAITING;
-      endcase
+  spiState_t currentState, nextState;
+  always_ff @(negedge spiClk, negedge nreset) begin : stateLogic
+    if (~nreset) begin
+      currentState <= WAITING;
+    end else begin
+      currentState <= nextState;
+    end
   end
+
+  always_comb begin : nextStateLogic
+    case (currentState)
+      WAITING: nextState = ~ncs ? RECEIVING : WAITING;
+      RECEIVING: nextState = (bitCounter == 0) ? DONE : RECEIVING;
+      DONE: nextState = ~ncs ? RECEIVING : WAITING;
+      default: nextState = WAITING;
+    endcase
+  end
+
 
   always_ff @(negedge spiClk) begin : bitCounterLogic
     if (currentState == RECEIVING) bitCounter <= bitCounter - 1;
