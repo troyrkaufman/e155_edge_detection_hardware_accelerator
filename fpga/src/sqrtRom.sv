@@ -10,5 +10,4 @@ module sqrtRom (
   end
 
   assign sqrtVal = sqrtRom[squareSum];
-  
 endmodule
