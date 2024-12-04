@@ -25,7 +25,7 @@
  * Refer to the datasheet for more low-level details. */ 
 
 // Initialize SPI
-void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
+void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receiveData);
 
 /* Transmits a character (1 byte) over SPI and returns the received character.
  *    -- send: the character to send over SPI
@@ -33,8 +33,6 @@ void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
 char spiSendReceive(SPI_TypeDef * SPIx, char send);
 
 /* Compacts SPI transaction into a function */
-void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd);
-
-uint8_t spiTransactionRead(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd);
+uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd);
 
 #endif

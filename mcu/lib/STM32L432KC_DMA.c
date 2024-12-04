@@ -1,10 +1,18 @@
 // STM32L432KC_DMA.c
-// Source code for DMA peripheral
+// Troy Kaufman
+// 11/25/24
+
+/* 
+* Source code for initializing DMA Channels and setting up Rx and Tx DMA applications. Three DMA channels 
+* are activated to faciliate seamless communication between devices and the MCU without MCU interruption. 
+* DMA1 Channel(s) 2 and 3 transfer and receive data between the ArduCAM Mini 2MP Plus camera module and MCU. 
+* DMA2 Channel 2 transfers the preprocessed data to the FPGA. 
+*/
 
 #include "STM32L432KC_DMA.h"
 #include "STM32L432KC_GPIO.h"
 
-// Receives data from camera module
+// Receives packets from camera module
 void initDMA1Ch2(void){
     DMA1_Channel2->CCR  &= ~(0xFFFFFFFF);
     DMA1_Channel2->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b10) |   // Priority is set to medium
@@ -16,7 +24,7 @@ void initDMA1Ch2(void){
                             );
     
     // Select the 1st option for mux to channel 2
-    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 0b0001);
+    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 0b0001); // SPI1_RX
 
     // Enable interrupt bit for channel 2
     DMA1_Channel2->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
@@ -25,10 +33,10 @@ void initDMA1Ch2(void){
     NVIC_EnableIRQ(DMA1_Channel2_IRQn);  
 }
 
-// Transfers data to camera module
+// Transfers SCLK and Command/Dummy packets to camera module
 void initDMA1Ch3(void){
   DMA1_Channel3->CCR  &= ~(0xFFFFFFFF);
-    DMA1_Channel3->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b00) |   // Priority is set to medium
+    DMA1_Channel3->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b01) |   // Priority is set to medium
                             _VAL2FLD(DMA_CCR_MINC, 0b1) | // memory address updates after every reception
                             _VAL2FLD(DMA_CCR_CIRC, 0b1) | // DMA NBYTE count will update to declared value
                             _VAL2FLD(DMA_CCR_DIR, 0b1) |  // Peripheral to memory transfer
@@ -37,17 +45,26 @@ void initDMA1Ch3(void){
                             );
     
     // Select the 1st option for mux to channel 3
-    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C3S, 0b0001);
+    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C3S, 0b0001); // SPI1_TX
+}
 
-    // Enable interrupt bit for channel 3
-    DMA1_Channel3->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
-
-    // Enable the interrupt for DMA1 Channel3
-    NVIC_EnableIRQ(DMA1_Channel3_IRQn);  // Enable DMA1 Channel 3 interrupt
+// Transfers processed pixel data to the FPGA
+void initDMA2Ch2(void){
+    DMA2_Channel2->CCR  &= ~(0xFFFFFFFF);
+    DMA2_Channel2->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b11) |   // Priority is set to be very high
+                            _VAL2FLD(DMA_CCR_MINC, 0b1) | // memory address updates after every reception
+                            _VAL2FLD(DMA_CCR_CIRC, 0b1) | // DMA NBYTE count will update to declared value
+                            _VAL2FLD(DMA_CCR_DIR, 0b1) |  // Peripheral to memory transfer
+                            _VAL2FLD(DMA_CCR_MSIZE, 0b00) | // Set to byte length
+                            _VAL2FLD(DMA_CCR_PSIZE, 0b00)   // Set to byte length
+                            );
+    
+    // Select the 1st option for mux to channel 3
+    DMA2_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 3); // SPI3_TX
 }
 
 void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
-  // DEST: Address of the data from peripheral
+    // DEST: Address of the data from peripheral
     DMA1_Channel2->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &(SPIx->DR));
 
     // SOURCE.: Address of the current buffer in use in memory
@@ -61,7 +78,7 @@ void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
 }
 
 void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
-  // DEST: Address of the data from peripheral
+    // DEST: Address of the data from peripheral
     DMA1_Channel3->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &(SPIx->DR));
 
     // SOURCE.: Address of the current buffer in use in memory
@@ -73,48 +90,11 @@ void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
     // Enable DMA1 channel.
     DMA1_Channel3->CCR  |= DMA_CCR_EN;
 
-    //digitalWrite(PA8, 1);
-    //digitalWrite(PA8, 0);
+
 }
 
 
 
-
-
-
-/*
-// RECEPTION FOR SPI1 DMA1CH2
-    DMA1_Channel2->CCR  &= ~(0xFFFFFFFF);
-    DMA1_Channel2->CCR  |= (_VAL2FLD(DMA_CCR_PL,0b10) |   // Priority is set to medium
-                            _VAL2FLD(DMA_CCR_MINC, 0b1) | // memory address updates after every reception
-                            _VAL2FLD(DMA_CCR_CIRC, 0b1) | // DMA NBYTE count will update to declared value
-                            _VAL2FLD(DMA_CCR_DIR, 0b0) |  // Peripheral to memory transfer
-                            _VAL2FLD(DMA_CCR_MSIZE, 0b00) | // Set to byte length
-                            _VAL2FLD(DMA_CCR_PSIZE, 0b00)   // Set to byte length
-                            );
-    
-    // Set DMA source and destination addresses.
-    // Source: Address of the data from peripheral
-    DMA1_Channel2->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &(SPIx->DR));
-
-    // DEST.: Address of the current buffer in use in memory
-    DMA1_Channel2->CMAR = _VAL2FLD(DMA_CMAR_MA, (uint32_t) currentBufferR);
-
-    // Set DMA data transfer length (# of samples)
-    DMA1_Channel2->CNDTR |= _VAL2FLD(DMA_CNDTR_NDT, 3840); // # pix per row * pixel width * # rows : 640 * 2 * 3
-    
-    // Select the 1st option for mux to channel 2
-    DMA1_CSELR->CSELR |= _VAL2FLD(DMA_CSELR_C2S, 0b0001);
-
-    // Enable interrupt bit for channel 2
-    DMA1_Channel2->CCR |=  _VAL2FLD(DMA_CCR_TCIE, 1);
-
-    // Enable DMA1 channel.
-    DMA1_Channel2->CCR  |= DMA_CCR_EN;
-
-    // Enable the interrupt for DMA1 Channel2
-    NVIC->ISER[1] |= (1<<DMA1_Channel2_IRQn);
-*/
 
 
 

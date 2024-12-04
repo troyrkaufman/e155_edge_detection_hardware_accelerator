@@ -7,11 +7,15 @@
 #include "STM32L432KC_SPI.h"
 #include "STM32L432KC_GPIO.h"
 
-void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
+void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receiveData){
 
 // TODO: Add SPI initialization code
    // Turn on SPI clock domain
+   if (receiveData == true){
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;
+    } else {
+    RCC->APB1ENR1 |= RCC_APB1ENR1_SPI3EN;
+    }
   
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_BR, 0b0111);
     
@@ -31,7 +35,11 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
     
     SPIx->CR2 &= ~SPI_CR2_NSSP;
 
+    if (receiveData == true) {
     SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
+    } else {
+    SPIx->CR2 |= SPI_CR2_TXDMAEN;
+    }
 
     SPIx->CR1 |= SPI_CR1_SPE;
 }
@@ -53,18 +61,12 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send){
     return SPIx->DR;
 }
 
-void spiTransaction(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd){
-    digitalWrite(gpioNum, 0);
+uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd){
+    uint8_t readByte;
+    digitalWrite(CE, 0);
     spiSendReceive(SPIx, addr);
-    spiSendReceive(SPIx, cmd);
-    digitalWrite(gpioNum, 1);
+    readByte = spiSendReceive(SPIx, cmd);
+    digitalWrite(CE, 1);
+    return readByte;
 }
 
-uint8_t spiTransactionRead(SPI_TypeDef * SPIx, int gpioNum, char addr, char cmd){
-    uint8_t read;
-    digitalWrite(gpioNum, 0);
-    spiSendReceive(SPIx, addr);
-    read = spiSendReceive(SPIx, cmd);
-    digitalWrite(gpioNum, 1);
-    return read;
-}
