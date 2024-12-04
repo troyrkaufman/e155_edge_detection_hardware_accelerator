@@ -11,50 +11,75 @@ module top (
     green,
     blue
 );
-  logic oscClk, mainClk, vgaClk;
-  logic [1:0] outVal;
-  logic [11:0] spiData;
-  logic spiDone;
+    logic oscClk, mainClk, vgaClk;
+    logic [1:0] outVal, edgeVal;
+    logic [11:0] spiData;
+    logic pixelDataValid, edgeValid;
 
-  HSOSC #(
-      .CLKHF_DIV("0b10")
-  ) hsosc (
-      .CLKHFEN(1'b1),
-      .CLKHFPU(1'b1),
-      .CLKHF  (oscClk)
-  );
+    logic [18:0] addressRead, addressWrite;
+
+    logic [3:0] pixelData[3][3];
+
+    HSOSC #(
+        .CLKHF_DIV("0b10")
+    ) hsosc (
+        .CLKHFEN(1'b1),
+        .CLKHFPU(1'b1),
+        .CLKHF  (oscClk)
+    );
 
 
-  pll50p35 vgaPll (
-      .ref_clk_i(oscClk),
-      .rst_n_i(nreset),
-      .outcore_o(mainClk),
-      .outglobal_o()
-  );
+    pll50p35 vgaPll (
+        .ref_clk_i(oscClk),
+        .rst_n_i(nreset),
+        .outcore_o(mainClk),
+        .outglobal_o()
+    );
 
-  spramController spramCont (
-      .mainClk(mainClk),
-      .nreset(nreset),
-      .addressRead(spiData),
-      .addressWrite(spiData),
-      .writeData(spiData[11:10]),
-      .load(spiDone),
-      .vgaClk(vgaClk),
-      .outVal(outVal)
-  );
+    spramController spramCont (
+        .mainClk(mainClk),
+        .nreset(nreset),
+        .addressRead(addressRead),
+        .addressWrite(addressWrite),
+        .writeData(edgeVal),
+        .load(edgeValid),
+        .vgaClk(vgaClk),
+        .outVal(outVal)
+    );
 
-  spiReceive #(12) spiRec (
-      .spiClk(spiClk),
-      .nreset(nreset),
-      .sdi(sdi),
-      .cs(ce),
-      .writeData(spiData),
-      .writeEnable(spiDone)
-  );
+    spiController spiCont(
+        .mainClk(mainClk),
+        .spiClk(spiClk),
+        .nreset(nreset),
+        .sdi(sdi),
+        .ncs(ce),
+        .pixelData(pixelData),
+        .pixelDataValid(pixelDataValid),
+        .spiXVal(addressWrite[9:0]),
+        .spiYVal(addressWrite[18:10])
+    );
 
-  assign red   = outVal;
-  assign green = outVal;
-  assign blue  = outVal;
+    vgaController vgaCont (
+        .vgaClk(vgaClk),
+        .rst(nreset),
+        .hSync(hSync),
+        .vSync(vSync),
+        .syncB(syncB),
+        .blankB(blankB),
+        .hCount(addressRead[9:0]),
+        .vCount(addressRead[18:10])
+    );
+
+    edgeDetect edgeDetectInst (
+        .inputValid(pixelDataValid),
+        .pixelData(pixelData),
+        .edgeVal(edgeVal),
+        .edgeValValid(edgeValid)
+    );
+
+    assign red   = syncB ? 2'b00 : outVal;
+    assign green = syncB ? 2'b00 : outVal;
+    assign blue  = syncB ? 2'b00 : outVal;
 
 
 endmodule
