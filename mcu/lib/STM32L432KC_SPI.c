@@ -7,7 +7,7 @@
 #include "STM32L432KC_SPI.h"
 #include "STM32L432KC_GPIO.h"
 
-void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
+void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
 
 // TODO: Add SPI initialization code
    // Turn on SPI clock domain
@@ -31,7 +31,7 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receive){
     
     SPIx->CR2 &= ~SPI_CR2_NSSP;
 
-    //SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
+    SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
 
     SPIx->CR1 |= SPI_CR1_SPE;
 }

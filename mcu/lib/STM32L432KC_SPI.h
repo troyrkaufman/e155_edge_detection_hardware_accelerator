@@ -25,7 +25,7 @@
  * Refer to the datasheet for more low-level details. */ 
 
 // Initialize SPI
-void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receive);
+void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
 
 /* Transmits a character (1 byte) over SPI and returns the received character.
  *    -- send: the character to send over SPI

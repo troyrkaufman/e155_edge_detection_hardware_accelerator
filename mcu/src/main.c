@@ -60,14 +60,6 @@ void processData(void) {
   }
 }
 
-uint32_t readFifoLength(void) {
-  uint8_t byte0_length, byte1_length, byte2_length;
-  byte0_length = spiTransactionRead(SPI1, CE1, 0x42, 0x00);
-  byte1_length = spiTransactionRead(SPI1, CE1, 0x43, 0x00);
-  byte2_length = spiTransactionRead(SPI1, CE1, 0x44, 0x00) & 0x7f;
-  return (byte2_length << 16) | (byte1_length << 8) | byte0_length & 0x07ffff;
-}
-
 int main(void) {
   // Buffers for PLL initialization
   configureFlash();
@@ -89,12 +81,8 @@ int main(void) {
   ////////////////////////////////
 
   init_I2C();
-  // digitalWrite(PA8, 1);
 
   for (volatile int i = 0; i < LENGTH; i++) {
-    // if (i == 3) {
-    //   delay_millis(TIM15, 5);
-    // }
     write_I2C(ADDR, reg[i], data[i]);
   }
 
@@ -103,105 +91,159 @@ int main(void) {
   ///////////////////////////////
 
   // Designate the SPI pins for Camera Module and MCU communication
-  pinMode(PA5, GPIO_ALT);    // SCK
-  // pinMode(PA7, GPIO_ALT);    // MOSI We'll use PA7 in reality but for now we'll use PB
-  pinMode(PB5, GPIO_ALT);       // MOSI
+  pinMode(PA5, GPIO_ALT);       // SCK
+  pinMode(PA7, GPIO_ALT);       // MOSI 
   pinMode(PA6, GPIO_ALT);       // MISO
   pinMode(PA8, GPIO_OUTPUT);    // CE
-  // pinMode(PB0, GPIO_ALT); // NSS
 
   // Designate the SPI pins for MCU and FPGA communication
-  pinMode(PB3, GPIO_ALT);    // SCK
-  // pinMode(PB5, GPIO_ALT);    // MOSI
-  pinMode(PB4, GPIO_ALT);        // MISO
-  pinMode(PC15, GPIO_OUTPUT);    // CE
+  pinMode(PB3, GPIO_ALT);       // SCK
+  pinMode(PB5, GPIO_ALT);       // MOSI
+  pinMode(PB4, GPIO_ALT);       // MISO
+  pinMode(PB1, GPIO_OUTPUT);    // CE
 
   // Give SPI pins proper ALT functions
   GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5);    // SCK PA5
-  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5);    // MOSI PA7 --> PB5 For now
+  GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL7, 5);    // MOSI PA7 
   GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5);    // MISO PA6
 
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL3, 5);    // SCK PB3
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL5, 5);    // MOSI PB5
+  GPIOB->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL4, 5);    // MISO PB4
+
   // Initialize SPI1
-  initSPI(SPI1, 7, 0, 0, true);
+  initSPI(SPI1, 7, 0, 0);
+  initSPI(SPI3, 1, 0, 0);
   digitalWrite(CE1, 1);
 
-  uint8_t frame_done = 0x00;
+  // Clear the internal ArudCAM's internal Fifo
+  spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
+  spiTransactionRead(SPI1, CE1, 0x87, 0x00);    // Reset CPLD
 
-  /*
-  while(1){
     spiTransaction(SPI1, CE1, 0x3d, 0x00);
-  }
-*/
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+    spiTransaction(SPI1, CE1, 0x3d, 0x00);
+
+
+  ////////////////////////////////
+  // DMA configuration
+  ////////////////////////////////
+
+  // Enable DMA Channels
+  RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
+  RCC->AHB1ENR |= (RCC_AHB1ENR_DMA2EN);
+
+  // Initialize DMA Channels
+  initDMA1Ch2(); // P -> M
+  initDMA1Ch3(); // M -> P
+
+  digitalWrite(CE1, 1);
+  digitalWrite(CE1, 0);
+
+  // Prepare DMA channels to receive pixel data and send sclk packets/burst read fifo command
+  spi_receive_dma(SPI1, currentBufferR, 40);
+  spi_transfer_dma(SPI1, regcnfgr, 40);
+
+  ////////////////////////////////
+  // Main Loop
+  ////////////////////////////////
 
   while (1) {
-    // Configure FIFO accordingly
-    // spiTransactionRead(SPI1, CE1, 0x84, 0x11); // Clear FIFO Done Flag
-    // delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x81, 0xFF); // 1 Frame to be Captured
-    // delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x83, 0x12);
-    // delay_millis(TIM15, 1);
-    ////spiTransactionRead(SPI1, CE1, , char cmd)
-    // spiTransactionRead(SPI1, CE1, 0x84, 0x10); // Reset Write Pointer
-    // delay_millis(TIM15, 1);
-    ////spiTransactionRead(SPI1, CE1, 0x07, 0x80); // Clear FIFO Done Flag
-    ////delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x87, 0x01); // Clear FIFO Done Flag
-    // delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x40, 0x73);
-    // delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x45, 0x73);
-    // delay_millis(TIM15, 1);
-    // spiTransactionRead(SPI1, CE1, 0x84, 0x02); // Start Capture
-    // delay_millis(TIM15, 1);
-    //spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
-    //spiTransactionRead(SPI1, CE1, 0x84, 0x11);    // Reset Fifo Read Pointer and Clear Done Bit
+    if (bufferFullR) {
+      processData();
+      initDMA1Ch3();
+      spi_transfer_dma(SPI1, regcnfgr, 40);
+      // DMA1_Channel3->CCR |= DMA_CCR_EN; // Stop SCLK packets
+      // spi_transfer_dma(SPI1, regcnfgr, 6);
+      // SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
+    }
+  }
+}
 
-    spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
-    spiTransactionRead(SPI1, CE1, 0x87, 0x00);    // Reset CPLD
+// Interrupt handler for DMA1Channel2 for RECEPTION
+void DMA1_Channel2_IRQHandler(void) {
+  if (DMA1->ISR & DMA_ISR_TCIF2) {        // Transfer Complete Interrupt
+    SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
+    DMA1->IFCR |= DMA_IFCR_CTCIF2;        // Clear the interrupt flag
 
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    spiTransaction(SPI1, CE1, 0x3d, 0x00);
-    
+    DMA1_Channel3->CCR &= ~DMA_CCR_EN;    // Stop SCLK packets
 
-    spiTransactionRead(SPI1, CE1, 0x81, 0x00);    // Set to Capture 1 Frame
-  
-    while(frame_done !=  0x08){
-      frame_done = spiTransactionRead(SPI1, CE1, 0x41, 0x00);
-      printf("Byte received %x\n", frame_done);
+    digitalWrite(CE1, 1);
+    delay_millis(TIM15, 1);
+    // Update buffers
+    if (currentBufferR == rxBuffer1) {
+      processBufferR      = rxBuffer1;    // Assign the filled buffer for processing
+      currentBufferR      = rxBuffer2;    // Switch DMA to the second buffer
+      DMA1_Channel2->CMAR = (uint32_t)&rxBuffer2;
+    } else {
+      processBufferR      = rxBuffer2;
+      currentBufferR      = rxBuffer1;
+      DMA1_Channel2->CMAR = (uint32_t)&rxBuffer1;
     }
 
-    spiTransaction(SPI1, CE1, 0x42, 0x00);
+    bufferFullR = 1;    // Flag that allows core to process the buffer
+  }
+}
 
 
-    /*
-    spiTransaction(SPI1, CE1, 0x41, 0x00);
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x85, 0x00);
-    delay_millis(TIM15, 1);
-    spiTransactionRead(SPI1, CE1, 0x87, 0x80);    // Reset CPLD
-    delay_millis(TIM15, 1);
-    spiTransactionRead(SPI1, CE1, 0x07, 0x00);    // Reset CPLD
-    delay_millis(TIM15, 1);
-    spiTransactionRead(SPI1, CE1, 0x87, 0x00);    // Reset CPLD
-    delay_millis(TIM15, 1);
-    spiTransactionRead(SPI1, CE1, 0x07, 0x00);    // Reset CPLD
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x80, 0x55);
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x00, 0x00);
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x46, 0x00);
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x47, 0x00);
-    delay_millis(TIM15, 1);
-    spiTransaction(SPI1, CE1, 0x48, 0x00);
-    delay_millis(TIM15, 1);
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// No longer used
+//uint32_t readFifoLength(void) {
+//  uint8_t byte0_length, byte1_length, byte2_length;
+//  byte0_length = spiTransactionRead(SPI1, CE1, 0x42, 0x00);
+//  byte1_length = spiTransactionRead(SPI1, CE1, 0x43, 0x00);
+//  byte2_length = spiTransactionRead(SPI1, CE1, 0x44, 0x00) & 0x7f;
+//  return (byte2_length << 16) | (byte1_length << 8) | byte0_length & 0x07ffff;
+//}
+
+
+
+
+void DMA1_Channel3_IRQHandler(void){
+
+  if (DMA1->ISR & DMA_ISR_TCIF3) {   // Transfer Complete Interrupt
+        SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
+        DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
+          digitalWrite(PA8, 1);
+         digitalWrite(PA8, 0);
+        SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
+        spi_transfer_dma(SPI1, regcnfgr, 6);
+
+
+  }
+}
+
+
+
+/*
     uint8_t foo = 0;
     spiTransactionRead(SPI1, CE1, 0x81, 0x00);    // Set to Capture 1 Frame
     delay_millis(TIM15, 1);
@@ -230,77 +272,7 @@ int main(void) {
       spiTransaction(SPI1, PA8, 0x3d, 00);
     }
   }
-  ////////////////////////////////
-  // DMA configuration
-  ////////////////////////////////
-  // Enable DMA Channels
-  RCC->AHB1ENR |= (RCC_AHB1ENR_DMA1EN);
-  RCC->AHB1ENR |= (RCC_AHB1ENR_DMA2EN);
-
-  initDMA1Ch2();
-  initDMA1Ch3();
-
-  digitalWrite(PA8, 1);
-  digitalWrite(PA8, 0);
-  spi_receive_dma(SPI1, currentBufferR, 40);
-  spi_transfer_dma(SPI1, regcnfgr, 40);
-
-  ////////////////////////////////
-  // Main Loop
-  ////////////////////////////////
-
-  while (1) {
-    if (bufferFullR) {
-      processData();
-      initDMA1Ch3();
-      spi_transfer_dma(SPI1, regcnfgr, 40);
-      // DMA1_Channel3->CCR |= DMA_CCR_EN; // Stop SCLK packets
-      // spi_transfer_dma(SPI1, regcnfgr, 6);
-      // SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
-    }
-  }
-}
-
-// Interrupt handler for DMA1Channel2 for RECEPTION
-void DMA1_Channel2_IRQHandler(void) {
-  if (DMA1->ISR & DMA_ISR_TCIF2) {        // Transfer Complete Interrupt
-                                          // SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
-    DMA1->IFCR |= DMA_IFCR_CTCIF2;        // Clear the interrupt flag
-
-    DMA1_Channel3->CCR &= ~DMA_CCR_EN;    // Stop SCLK packets
-
-    digitalWrite(PA8, 1);
-    delay_millis(TIM15, 1);
-    // Update buffers
-    if (currentBufferR == rxBuffer1) {
-      processBufferR      = rxBuffer1;    // Assign the filled buffer for processing
-      currentBufferR      = rxBuffer2;    // Switch DMA to the second buffer
-      DMA1_Channel2->CMAR = (uint32_t)&rxBuffer2;
-    } else {
-      processBufferR      = rxBuffer2;
-      currentBufferR      = rxBuffer1;
-      DMA1_Channel2->CMAR = (uint32_t)&rxBuffer1;
-    }
-
-    bufferFullR = 1;    // Flag that allows core to process the buffer
-  }
-}
-
-/*
-void DMA1_Channel3_IRQHandler(void){
-
-  if (DMA1->ISR & DMA_ISR_TCIF3) {   // Transfer Complete Interrupt
-        SPI1->CR1 &= ~SPI_CR1_SPE; // Disable SPI after transfer
-        DMA1->IFCR |= DMA_IFCR_CTCIF3; // Clear the interrupt flag
-          digitalWrite(PA8, 1);
-         digitalWrite(PA8, 0);
-        SPI1->CR1 |= SPI_CR1_SPE; // Re-enable SPI before starting the next transfer
-        spi_transfer_dma(SPI1, regcnfgr, 6);
-
-
-  }
-}
-*/
+  */
 
 /*   // Reset DMA2 Channel 2
     RCC->AHB1ENR  |= (RCC_AHB1ENR_DMA2EN);
