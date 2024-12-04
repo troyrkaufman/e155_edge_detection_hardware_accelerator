@@ -116,7 +116,7 @@ module spramController (
       writeDataBuffer <= 0;
       writeDataLine   <= 0;
     end else begin
-      if (load && addressWrite != addressBuffer) begin // done to prevent multiple writes to the same address (spi is slow)
+      if (load) begin  // done to prevent multiple writes to the same address (spi is slow)
         writeDataBuffer <= {writeData, 1'b1};
         addressBuffer   <= addressWrite;
       end

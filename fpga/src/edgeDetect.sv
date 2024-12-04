@@ -12,7 +12,8 @@ module edgeDetect (
     ADD,
     SUB,
     SQUARE,
-    SQRT
+    SQRT,
+    COMPRESS
   } pipelineState_t;
   pipelineState_t pipelineState, nextState;
 
@@ -53,7 +54,8 @@ module edgeDetect (
       ADD: nextState = SUB;
       SUB: nextState = SQUARE;
       SQUARE: nextState = SQRT;
-      SQRT: nextState = WAIT;
+      SQRT: nextState = COMPRESS;
+      COMPRESS: nextState = WAIT;
       default: nextState = WAIT;
     endcase
   end
@@ -99,5 +101,5 @@ module edgeDetect (
     nextSquareSum = rowSquare + colSquare;
   end
 
-  assign edgeValValid = pipelineState == SQRT;
+  assign edgeValValid = pipelineState == COMPRESS;
 endmodule

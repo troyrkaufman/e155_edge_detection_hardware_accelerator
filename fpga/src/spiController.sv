@@ -45,7 +45,7 @@ module spiController (
   always_comb begin : spiStateNextLogic
     case (spiState)
       RECEIVING: nextSpiState = spiDone ? DATA_DONE : RECEIVING;
-      DATA_DONE: nextSpiState = WAIT_RESET;
+      DATA_DONE: nextSpiState = spiDone ? WAIT_RESET : RECEIVING;
       WAIT_RESET:
       nextSpiState = spiDone ? WAIT_RESET : RECEIVING; // this is to account for the SPI clock being much slower
       default: nextSpiState = RECEIVING;
