@@ -1,0 +1,114 @@
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# 7 compiles, 0 failed with no errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv failed with 7 errors.
+# 8 compiles, 1 failed with 7 errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv failed with 4 errors.
+# 8 compiles, 1 failed with 4 errors.
+# Compile of top_tb.sv was successful with warnings.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv was successful with warnings.
+# 8 compiles, 0 failed with no errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv was successful with warnings.
+# 8 compiles, 0 failed with no errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv was successful with warnings.
+# 8 compiles, 0 failed with no errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv was successful.
+# 8 compiles, 0 failed with no errors.
+# Compile of bitCompress.sv was successful.
+# Compile of edgeDetect.sv was successful with warnings.
+# Compile of spiController.sv was successful.
+# Compile of spiRecieve.sv was successful.
+# Compile of spramController.sv was successful.
+# Compile of sqrtRom.sv was successful.
+# Compile of top.sv was successful.
+# Compile of top_tb.sv was successful.
+# 8 compiles, 0 failed with no errors.
+vsim
+# vsim -gui work.top -t ns 
+# Start time: 03:46:09 on Dec 05,2024
+# Loading sv_std.std
+# Loading work.top
+# ** Error: (vsim-3033) Instantiation of 'HSOSC' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top File: C:/Users/troyk/hmc-e155-project/fpga/src/top.sv Line: 25
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# ** Error: (vsim-3033) Instantiation of 'pll50p35' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top File: C:/Users/troyk/hmc-e155-project/fpga/src/top.sv Line: 32
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# Loading work.spramController
+# ** Error: (vsim-3033) Instantiation of 'SP256K' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top/spramCont File: C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv Line: 46
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# ** Error: (vsim-3033) Instantiation of 'SP256K' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top/spramCont File: C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv Line: 59
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# ** Error: (vsim-3033) Instantiation of 'SP256K' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top/spramCont File: C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv Line: 72
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# ** Error: (vsim-3033) Instantiation of 'SP256K' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top/spramCont File: C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv Line: 85
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# Loading work.spiController
+# Loading work.spiReceive
+# ** Error: (vsim-3033) Instantiation of 'vgaController' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /top File: C:/Users/troyk/hmc-e155-project/fpga/src/top.sv Line: 62
+#         Searched libraries:
+#             C:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim/work
+# Loading work.edgeDetect
+# Loading work.sqrtRom
+# Loading work.bitCompress
+# Error loading design
+# End time: 03:46:09 on Dec 05,2024, Elapsed time: 0:00:00
+# Errors: 7, Warnings: 15

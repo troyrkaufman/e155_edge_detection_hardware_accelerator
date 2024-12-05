@@ -1,0 +1,51 @@
+C:/Users/troyk/hmc-e155-project/fpga/src/spiController.sv {1 {vlog -work work -sv -stats=none {C:\Users\troyk\hmc-e155-project\fpga\src\spiController.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module spiController
+
+Top level modules:
+	spiController
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv {1 {vlog -work work -sv -stats=none C:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module sqrtRom
+
+Top level modules:
+	sqrtRom
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/edgeDetect.sv {2 {vlog -work work -sv -stats=none {C:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module edgeDetect
+** Warning: C:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv(5): (vlog-13314) Defaulting port 'pixelData' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+Top level modules:
+	edgeDetect
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv {1 {vlog -work work -sv -stats=none C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module spramController
+
+Top level modules:
+	spramController
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv {1 {vlog -work work -sv -stats=none C:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module spiReceive
+
+Top level modules:
+	spiReceive
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/top.sv {1 {vlog -work work -sv -stats=none {C:\Users\troyk\hmc-e155-project\fpga\src\top.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module top
+
+Top level modules:
+	top
+
+} {} {}} C:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv {1 {vlog -work work -sv -stats=none C:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module bitCompress
+
+Top level modules:
+	bitCompress
+
+} {} {}}

@@ -1,0 +1,217 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/troyk/hmc-e155-project/fpga/sim
+vbitCompress
+Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z1 !s110 1733399152
+!i10b 1
+!s100 dBBMQg:W21<ZUPkkdbYDi3
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I]UdAfaV?cN8d]1PAVeiXC3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+S1
+Z4 dC:/Users/troyk/hmc-e155-project/fpga/sim/tk_sim
+Z5 w1733387658
+8C:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv
+FC:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv
+!i122 54
+Z6 L0 1 13
+Z7 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z8 !s108 1733399152.000000
+!s107 C:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/troyk/hmc-e155-project/fpga/src/bitCompress.sv|
+!i113 1
+Z9 o-work work -sv
+Z10 tCvgOpt 0
+nbit@compress
+vedgeDetect
+R0
+R1
+!i10b 1
+!s100 jo:FbTFNRHPI4O9=lLQ3i0
+R2
+I^gVajic@7h2SL7W<IO9`c3
+R3
+S1
+R4
+R5
+8C:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv
+FC:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv
+!i122 55
+L0 1 105
+R7
+r1
+!s85 0
+31
+R8
+!s107 C:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\troyk\hmc-e155-project\fpga\src\edgeDetect.sv|
+!i113 1
+R9
+R10
+nedge@detect
+vspiController
+R0
+R1
+!i10b 1
+!s100 l@cCOnK:D@Tb55?fCZk=i3
+R2
+IXb;hL^@FJLnmkA_=kJQkD0
+R3
+S1
+R4
+Z11 w1733399133
+8C:\Users\troyk\hmc-e155-project\fpga\src\spiController.sv
+FC:\Users\troyk\hmc-e155-project\fpga\src\spiController.sv
+!i122 56
+L0 1 110
+R7
+r1
+!s85 0
+31
+R8
+!s107 C:\Users\troyk\hmc-e155-project\fpga\src\spiController.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\troyk\hmc-e155-project\fpga\src\spiController.sv|
+!i113 1
+R9
+R10
+nspi@controller
+vspiReceive
+R0
+Z12 !s110 1733399153
+!i10b 1
+!s100 OfXK;bIAM@;UY18eSgfah1
+R2
+Id;Sb1>DbT76M`_T^Kk[c31
+R3
+S1
+R4
+R11
+8C:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv
+FC:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv
+!i122 57
+L0 1 57
+R7
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/troyk/hmc-e155-project/fpga/src/spiRecieve.sv|
+!i113 1
+R9
+R10
+nspi@receive
+vspramController
+R0
+R12
+!i10b 1
+!s100 zgE1dZG56aW4hBid@=bcc3
+R2
+I>Z<IZ?GUR4143RW]MQ1:d0
+R3
+S1
+R4
+R11
+8C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv
+FC:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv
+!i122 58
+L0 1 159
+R7
+r1
+!s85 0
+31
+Z13 !s108 1733399153.000000
+!s107 C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/troyk/hmc-e155-project/fpga/src/spramController.sv|
+!i113 1
+R9
+R10
+nspram@controller
+vsqrtRom
+R0
+R12
+!i10b 1
+!s100 <ZKXz9XM@[zW0nVoZ8JBf3
+R2
+IKhM2?O?lA6D4aKiHGkP>Z0
+R3
+S1
+R4
+R5
+8C:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv
+FC:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv
+!i122 59
+R6
+R7
+r1
+!s85 0
+31
+R13
+!s107 C:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/troyk/hmc-e155-project/fpga/src/sqrtRom.sv|
+!i113 1
+R9
+R10
+nsqrt@rom
+vtop
+R0
+R12
+!i10b 1
+!s100 ZaP_mMakz_Vc]GM]O1Z:M2
+R2
+IjD_k_`e^?:O2gDb_acUkk1
+R3
+S1
+R4
+R5
+8C:\Users\troyk\hmc-e155-project\fpga\src\top.sv
+FC:\Users\troyk\hmc-e155-project\fpga\src\top.sv
+!i122 60
+L0 1 87
+R7
+r1
+!s85 0
+31
+R13
+!s107 C:\Users\troyk\hmc-e155-project\fpga\src\top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\troyk\hmc-e155-project\fpga\src\top.sv|
+!i113 1
+R9
+R10
+vtop_tb
+R0
+R12
+!i10b 1
+!s100 E8loKZWP^2SC7icaOVWGY2
+R2
+I4bAcU0cX4UI7Kh:ScN`R13
+R3
+S1
+R4
+w1733399087
+8C:\Users\troyk\hmc-e155-project\fpga\sim\tk_sim\top_tb.sv
+FC:\Users\troyk\hmc-e155-project\fpga\sim\tk_sim\top_tb.sv
+!i122 61
+L0 2 27
+R7
+r1
+!s85 0
+31
+R13
+!s107 C:\Users\troyk\hmc-e155-project\fpga\sim\tk_sim\top_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\troyk\hmc-e155-project\fpga\sim\tk_sim\top_tb.sv|
+!i113 1
+R9
+R10
