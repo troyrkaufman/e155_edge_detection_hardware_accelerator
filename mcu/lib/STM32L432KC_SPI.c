@@ -24,7 +24,7 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_SSI, 0b1);
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_MSTR, 0b1);
 
-    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b1011); // 12 bit data packet
+    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b1111); // 16 bit data packet
     //SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b0111); 
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_SSOE, 0b1);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRF, 0b0);
@@ -71,7 +71,7 @@ uint16_t spiColSend(SPI_TypeDef *SPIx, int CE, char byte1, char byte2, char byte
     uint8_t nib3 = byte3 & 0x0F; // Mask the lower nibble
 
     // Concatenate the nibbles into a 16-bit value
-    uint16_t dataToSend = (nib1 << 8) | ((nib2 & 0x0F) << 4) | (nib3 & 0x0F);
+    uint16_t dataToSend = (nib1 << 8) | (nib2 << 4) | nib3;
 
     // Wait until the SPI is ready to transmit
     while (!(SPIx->SR & SPI_SR_TXE));

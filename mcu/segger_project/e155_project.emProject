@@ -46,12 +46,6 @@
       project_directory=""
       project_type="Executable"
       target_reset_script="Reset();" />
-    <folder Name="ArduCam">
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-      <file file_name="../STM32L152/HARDWARE/ArduCAM/ArduCAM.c" />
-      <file file_name="../STM32L152/HARDWARE/ArduCAM/ArduCAM.h" />
-      <file file_name="../STM32L152/HARDWARE/ArduCAM/ov2640_updated.h" />
-    </folder>
     <folder Name="CMSIS Files">
       <file file_name="STM32L4xx/Device/Include/stm32l4xx.h" />
       <file file_name="STM32L4xx/Device/Source/system_stm32l4xx.c">
@@ -60,16 +54,6 @@
           default_code_section=".init"
           default_const_section=".init_rodata" />
       </file>
-    </folder>
-    <folder Name="delay">
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-      <file file_name="../STM32L152/HARDWARE/delay/delay.c" />
-      <file file_name="../STM32L152/HARDWARE/delay/delay.h" />
-    </folder>
-    <folder Name="I2C">
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-      <file file_name="../STM32L152/HARDWARE/I2C/sccb_bus.c" />
-      <file file_name="../STM32L152/HARDWARE/I2C/sccb_bus.h" />
     </folder>
     <folder Name="Script Files">
       <file file_name="STM32L4xx/Scripts/STM32L4xx_Target.js">
@@ -97,70 +81,6 @@
       <file file_name="../lib/STM32L432KC_TIM.h" />
       <file file_name="../lib/STM32L432KC_USART.c" />
       <file file_name="../lib/STM32L432KC_USART.h" />
-    </folder>
-    <folder Name="SPI">
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-      <file file_name="../STM32L152/HARDWARE/SPI/spi.c" />
-      <file file_name="../STM32L152/HARDWARE/SPI/spi.h" />
-    </folder>
-    <folder Name="STM32L1xxStdPeriph_Driver">
-      <configuration Name="Debug" build_exclude_from_build="Yes" />
-      <folder Name="headers">
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/misc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_adc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_aes.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_comp.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_crc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_dac.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_dbgmcu.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_dma.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_exti.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_flash.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_fsmc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_gpio.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_i2c.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_iwdg.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_lcd.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_opamp.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_pwr.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_rcc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_rtc.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_sdio.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_spi.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_syscfg.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_tim.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_usart.h" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/inc/stm32l1xx_wwdg.h" />
-      </folder>
-      <folder Name="src">
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/misc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_adc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_aes.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_aes_util.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_comp.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_crc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_dac.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_dbgmcu.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_dma.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_exti.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_flash.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_flash_ramfunc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_fsmc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_gpio.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_i2c.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_iwdg.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_lcd.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_opamp.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_pwr.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_rcc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_rtc.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_sdio.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_spi.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_syscfg.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_tim.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_usart.c" />
-        <file file_name="../STM32L152/STM32L1xx_StdPeriph_Driver/src/stm32l1xx_wwdg.c" />
-      </folder>
     </folder>
     <folder Name="System Files">
       <file file_name="SEGGER_THUMB_Startup.s" />
