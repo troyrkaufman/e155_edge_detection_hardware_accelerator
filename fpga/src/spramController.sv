@@ -12,8 +12,8 @@ module spramController (
   //* Control Logic
   typedef enum logic [1:0] {
     READ,
-    WAIT,
     LOAD,
+    WAIT,
     WRITE
   } controlState_t;
 
@@ -26,10 +26,10 @@ module spramController (
 
   always_comb begin
     case (controlState)
-      READ: nextState = WAIT;
-      WAIT: nextState = LOAD;
-      LOAD: nextState = WRITE;
-      WRITE: nextState = WAIT;
+      READ: nextState = LOAD;
+      LOAD: nextState = WAIT;
+      WAIT: nextState = WRITE;
+      WRITE: nextState = READ;
       default: nextState = WAIT;
     endcase
   end
@@ -96,7 +96,7 @@ module spramController (
   );
 
   //* Address Logic
-  assign address = controlState == READ || controlState == LOAD ? addressRead : addressBuffer;
+  assign address = controlState == READ || controlState == WAIT ? addressRead : addressBuffer;
 
   //* Read Data Logic
   always_comb begin

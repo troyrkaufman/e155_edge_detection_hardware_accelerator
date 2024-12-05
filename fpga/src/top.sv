@@ -32,8 +32,8 @@ module top (
   pll50p35 vgaPll (
       .ref_clk_i(oscClk),
       .rst_n_i(nreset),
-      .outcore_o(mainClk),
-      .outglobal_o()
+      .outcore_o(),
+      .outglobal_o(mainClk)
   );
 
   spramController spramCont (
@@ -61,10 +61,10 @@ module top (
 
   vgaController vgaCont (
       .vgaClk(vgaClk),
-      .rst(nreset),
-      .hSync(hSync),
-      .vSync(vSync),
-      .syncB(syncB),
+      .nreset(nreset),
+      .hSync (hSync),
+      .vSync (vSync),
+      .syncB (syncB),
       .blankB(blankB),
       .hCount(addressRead[9:0]),
       .vCount(addressRead[18:10])

@@ -18,6 +18,9 @@ module spiController (
 
   logic spiDone;
 
+  logic [9:0] nextSpiXVal;
+  logic [8:0] nextSpiYVal;
+
   spiReceive #(
       .messageBits(16)
   ) spiReceiveInst (
@@ -53,6 +56,9 @@ module spiController (
   end
 
   assign pixelDataValid = spiState == DATA_DONE;
+
+  assign nextSpiXVal = nextSpiState == DATA_DONE ? (spiXVal == 319 ? 0 : spiXVal + 1) : spiXVal;
+  assign nextSpiYVal = nextSpiState == DATA_DONE ? (spiYVal == 239 ? 0 : spiYVal + 1) : spiYVal;
 
   always_ff @(posedge mainClk, negedge nreset) begin : coordLogic
     if (~nreset) begin
