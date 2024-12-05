@@ -34,24 +34,26 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
 
     //SPIx->CR2 |= SPI_CR2_TXDMAEN; // Enable the DMA for transmission
 
-    SPIx->CR1 |= SPI_CR1_SPE;
+  SPIx->CR1 |= SPI_CR1_SPE;
 }
 
-char spiSendReceive(SPI_TypeDef * SPIx, char send){
-    // Wait until the TXFIFO level is less than half of its capacity to send data
-    while(!(SPIx->SR & SPI_SR_TXE)); 
-    
-    // Send byte once, however, we run into a slight problem since we set our bit width to 8 bits in SPI
-    // 1) First capture address of the 16 bit DR
-    // 2) Cast this 16 bit value as a volatile 8 bit integer pointer
-    // 3) Then dereference this value
-    *((volatile uint8_t *) &SPIx->DR) = send;             
+char spiSendReceive(SPI_TypeDef *SPIx, char send) {
+  // Wait until the TXFIFO level is less than half of its capacity to send data
+  while (!(SPIx->SR & SPI_SR_TXE))
+    ;
 
-    // Wait until there is data in the RXFIFO
-    while((!(SPIx->SR & SPI_SR_RXNE)));
-    
-    // Read byte once
-    return SPIx->DR;
+  // Send byte once, however, we run into a slight problem since we set our bit
+  // width to 8 bits in SPI 1) First capture address of the 16 bit DR 2) Cast
+  // this 16 bit value as a volatile 8 bit integer pointer 3) Then dereference
+  // this value
+  *((volatile uint8_t *)&SPIx->DR) = send;
+
+  // Wait until there is data in the RXFIFO
+  while ((!(SPIx->SR & SPI_SR_RXNE)))
+    ;
+
+  // Read byte once
+  return SPIx->DR;
 }
 
 uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd){

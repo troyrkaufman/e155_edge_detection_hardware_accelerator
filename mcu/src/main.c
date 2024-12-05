@@ -6,6 +6,7 @@ Date: 11/12/24
 */
 
 #include "main.h"
+#include "main.h"
 #include <stdio.h>
 
 /*
@@ -33,7 +34,14 @@ int main(void) {
 
   // Enable interrupts globally
   __enable_irq();
+  // Enable interrupts globally
+  __enable_irq();
 
+  // Enable the GPIO ports
+  RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOAEN, 1);
+  RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOBEN, 1);
+  RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOCEN, 1);
+  RCC->APB2ENR |= _VAL2FLD(RCC_APB2ENR_TIM15EN, 1);
   // Enable the GPIO ports
   RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOAEN, 1);
   RCC->AHB2ENR |= _VAL2FLD(RCC_AHB2ENR_GPIOBEN, 1);
@@ -42,6 +50,9 @@ int main(void) {
 
   initTIM(TIM15);
 
+  ///////////////////////////////
+  // SPI Configuration
+  ///////////////////////////////
   ///////////////////////////////
   // SPI Configuration
   ///////////////////////////////
