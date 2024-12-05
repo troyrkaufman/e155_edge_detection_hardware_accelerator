@@ -1,0 +1,93 @@
+{C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module top_tb
+
+Top level modules:
+	top_tb
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/top.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/top.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module top
+
+Top level modules:
+	top
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module bitCompress
+
+Top level modules:
+	bitCompress
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv} {2 {vlog -work work -vopt -sv -stats=none {C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module edgeDetect
+** Warning: C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv(5): (vlog-13314) Defaulting port 'pixelData' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+Top level modules:
+	edgeDetect
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vga.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vga.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module vga
+
+Top level modules:
+	vga
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module spramController
+
+Top level modules:
+	spramController
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module spiReceive
+
+Top level modules:
+	spiReceive
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module sqrtRom
+
+Top level modules:
+	sqrtRom
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/videoGen.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/videoGen.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module videoGen
+
+Top level modules:
+	videoGen
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vgaController.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vgaController.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module vgaController
+
+Top level modules:
+	vgaController
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module top_sim
+
+Top level modules:
+	top_sim
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module uPLogoRom
+
+Top level modules:
+	uPLogoRom
+
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiController.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiController.sv}
+Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
+-- Compiling module spiController
+
+Top level modules:
+	spiController
+
+} {} {}}

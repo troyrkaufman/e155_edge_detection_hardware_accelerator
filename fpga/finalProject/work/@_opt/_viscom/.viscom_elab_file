@@ -1,0 +1,1 @@
+C:/lscc/radiant/2024.1/questasim/win64/VisualizerRls/bin/viscom.exe -nolock -quiet -jmem_size 393216 work.top_tb(fast) -quiet -auto_acc_if_foreign -work work -L iCE40UP +acc -allow_unnamed -o _opt -id 3-04cf4b1dfbcd-6751e80e-28c-1298 {+__design_bin_path+C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject} +__betafsm
