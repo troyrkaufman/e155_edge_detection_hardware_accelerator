@@ -9,8 +9,6 @@ module spramController (
     output logic [1:0] outVal
 );
 
-  //* Clock Dividing
-
   //* Control Logic
   typedef enum logic [1:0] {
     READ,

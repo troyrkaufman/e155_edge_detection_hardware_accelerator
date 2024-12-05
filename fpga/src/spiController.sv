@@ -60,10 +60,10 @@ module spiController (
       spiYVal <= 0;
     end else if (spiState == DATA_DONE) begin
       spiXVal <= spiXVal + 1;
-      if (spiXVal == 640) begin
+      if (spiXVal == 320) begin
         spiXVal <= 0;
         spiYVal <= spiYVal + 1;
-        if (spiYVal == 480) begin
+        if (spiYVal == 240) begin
           spiXVal <= 0;
           spiYVal <= 0;
         end

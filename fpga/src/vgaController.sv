@@ -20,29 +20,35 @@ module vgaController #(
     output logic [8:0] vCount
 );
 
+  logic [9:0] hCountInternal;
+  logic [8:0] vCountInternal;
+
+  assign hCount = hCountInternal > 320 ? hCountInternal - 320 : hCountInternal;
+  assign vCount = vCountInternal > 240 ? vCountInternal - 240 : vCountInternal;
+
   always @(posedge vgaClk, posedge rst) begin
     if (rst) begin
-      hCount <= 0;
-      vCount <= 0;
+      hCountInternal <= 0;
+      vCountInternal <= 0;
     end else begin
       hCount <= hCount + 1;
-      if (hCount == HMAX) begin
-        hCount <= 0;
-        vCount <= vCount + 1;
-        if (vCount == VMAX) begin
-          vCount <= 0;
+      if (hCountInternal == HMAX) begin
+        hCountInternal <= 0;
+        vCountInternal <= vCountInternal + 1;
+        if (vCountInternal == VMAX) begin
+          vCountInternal <= 0;
         end
       end
     end
   end
 
-  assign hSync  = ~((hCount >= (HACTIVE + HFP)) & (hCount < HACTIVE + HFP + HSYNC));
-  // not hcount >= 656 aand hcount < 752
-  // hcount < 656 or hcount >= 752
-  assign vSync  = ~((vCount >= (VACTIVE + VFP)) & (vCount < VACTIVE + VFP + VSYNC));
-  // not vcount >= 491 and vcount < 493
-  // vcount < 491 or vcount >= 493
-  assign syncB  = hCount < HACTIVE & vCount < VACTIVE;
+  assign hSync  = ~((hCountInternal >= (HACTIVE + HFP)) & (hCountInternal < HACTIVE + HFP + HSYNC));
+  // not hCountInternal >= 656 aand hCountInternal < 752
+  // hCountInternal < 656 or hCountInternal >= 752
+  assign vSync  = ~((vCountInternal >= (VACTIVE + VFP)) & (vCountInternal < VACTIVE + VFP + VSYNC));
+  // not vCountInternal >= 491 and vCountInternal < 493
+  // vCountInternal < 491 or vCountInternal >= 493
+  assign syncB  = hCountInternal < HACTIVE & vCountInternal < VACTIVE;
   assign blankB = hSync & vSync;
 
 endmodule

@@ -9,7 +9,6 @@ module spiReceive #(
     output logic writeEnable
 );
   logic [3:0] bitCounter;
-
   logic [15:0] writeDataBuffer;
   typedef enum logic [1:0] {
     WAITING,
