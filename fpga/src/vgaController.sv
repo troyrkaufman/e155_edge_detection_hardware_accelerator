@@ -23,15 +23,15 @@ module vgaController #(
   logic [9:0] hCountInternal;
   logic [8:0] vCountInternal;
 
-  assign hCount = hCountInternal > 320 ? hCountInternal - 320 : hCountInternal;
-  assign vCount = vCountInternal > 240 ? vCountInternal - 240 : vCountInternal;
+  assign hCount = hCountInternal >= 320 ? hCountInternal - 320 : hCountInternal;
+  assign vCount = vCountInternal >= 240 ? vCountInternal - 240 : vCountInternal;
 
   always @(posedge vgaClk, posedge rst) begin
     if (rst) begin
       hCountInternal <= 0;
       vCountInternal <= 0;
     end else begin
-      hCount <= hCount + 1;
+      hCountInternal <= hCountInternal + 1;
       if (hCountInternal == HMAX) begin
         hCountInternal <= 0;
         vCountInternal <= vCountInternal + 1;
