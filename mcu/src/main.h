@@ -30,8 +30,12 @@
 #define MISO2 PB4
 #define CE2   PB1
 
-#define BUFFER_SIZE_R 40 // should be 640*3*2
-#define BUFFER_SIZE_T 40 // should be 640
+#define BUFFER_SIZE_R 3840 // should be 640*3*2
+#define BUFFER_SIZE_T 1 // should be 640
+
+uint8_t grayBuf[9] __attribute__((section(".sram1_data"))) = {
+  0x13, 0x18, 0x58, 0xda, 0x3f, 0xac, 0x44, 0xd1, 0x82
+};
 
 
 uint8_t  regBuf[40] __attribute__((section(".sram1_data")))  = { // 40 bytes  

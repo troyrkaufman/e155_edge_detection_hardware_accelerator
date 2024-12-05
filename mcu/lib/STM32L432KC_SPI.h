@@ -25,7 +25,7 @@
  * Refer to the datasheet for more low-level details. */ 
 
 // Initialize SPI
-void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha, bool receiveData);
+void initSPI(SPI_TypeDef * SPIx,  int br, int cpol, int cpha);
 
 /* Transmits a character (1 byte) over SPI and returns the received character.
  *    -- send: the character to send over SPI
@@ -34,5 +34,8 @@ char spiSendReceive(SPI_TypeDef * SPIx, char send);
 
 /* Compacts SPI transaction into a function */
 uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd);
+
+// Sends a 12 bit signal 
+uint16_t spiColSend(SPI_TypeDef *SPIx, int CE, char byte1, char byte2, char byte3);
 
 #endif

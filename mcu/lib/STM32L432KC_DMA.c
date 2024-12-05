@@ -77,7 +77,7 @@ void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
     DMA1_Channel2->CCR  |= DMA_CCR_EN;
 }
 
-void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len){
+void spi_transfer_dma(SPI_TypeDef * SPIx, uint16_t * src, uint32_t len){
     // DEST: Address of the data from peripheral
     DMA1_Channel3->CPAR = _VAL2FLD(DMA_CPAR_PA, (uint32_t) &(SPIx->DR));
 

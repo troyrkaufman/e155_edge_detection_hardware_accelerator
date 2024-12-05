@@ -7,17 +7,13 @@
 #include "STM32L432KC_SPI.h"
 #include "STM32L432KC_GPIO.h"
 
-void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receiveData){
+void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
 
 // TODO: Add SPI initialization code
    // Turn on SPI clock domain
-   if (receiveData == true){
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;
-    } else {
-    RCC->APB1ENR1 |= RCC_APB1ENR1_SPI3EN;
-    }
   
-    SPIx->CR1 |= _VAL2FLD(SPI_CR1_BR, 0b0111);
+    SPIx->CR1 |= _VAL2FLD(SPI_CR1_BR, br);
     
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPOL, cpol);
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_CPHA, cpha);
@@ -28,18 +24,15 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha, bool receiveData){
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_SSI, 0b1);
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_MSTR, 0b1);
 
-    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b0111);
+    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b1011); // 12 bit data packet
+    //SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b0111); 
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_SSOE, 0b1);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRF, 0b0);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRXTH, 0b1);
     
     SPIx->CR2 &= ~SPI_CR2_NSSP;
 
-    if (receiveData == true) {
-    SPIx->CR2 |= SPI_CR2_RXDMAEN | SPI_CR2_TXDMAEN;
-    } else {
-    SPIx->CR2 |= SPI_CR2_TXDMAEN;
-    }
+    //SPIx->CR2 |= SPI_CR2_TXDMAEN; // Enable the DMA for transmission
 
     SPIx->CR1 |= SPI_CR1_SPE;
 }
@@ -69,4 +62,36 @@ uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd){
     digitalWrite(CE, 1);
     return readByte;
 }
+
+uint16_t spiColSend(SPI_TypeDef *SPIx, int CE, char byte1, char byte2, char byte3){
+    uint8_t nib1 = byte1 & 0x0F; // Mask the lower nibble
+    uint8_t nib2 = byte2 & 0x0F; // Mask the lower nibble
+    uint8_t nib3 = byte3 & 0x0F; // Mask the lower nibble
+
+    // Concatenate the nibbles into a 16-bit value
+    uint16_t dataToSend = (nib1 << 8) | ((nib2 & 0x0F) << 4) | (nib3 & 0x0F);
+
+    // Wait until the SPI is ready to transmit
+    while (!(SPIx->SR & SPI_SR_TXE));
+
+    // Send the 16-bit value
+    SPIx->DR = dataToSend;
+
+    // Wait until the transmission is complete
+    while (SPIx->SR & SPI_SR_BSY);
+    
+    
+    
+    /*
+    digitalWrite(CE, 0);
+    
+    while(!(SPIx->SR & SPI_SR_TXE)); 
+    *((volatile uint16_t *) &SPIx->DR) = ((nib1<<8) | (nib2<<4) | nib3);
+    while((!(SPIx->SR & SPI_SR_RXNE)));
+    return SPIx->DR;
+    digitalWrite(CE, 1);
+    */
+}
+
+
 

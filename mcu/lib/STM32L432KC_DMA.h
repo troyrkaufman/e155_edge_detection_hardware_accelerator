@@ -19,7 +19,7 @@ void initDMA2Ch2(void);
 
 void spi_receive_dma(SPI_TypeDef * SPIx, uint8_t * src, uint32_t len);
 
-void spi_transfer_dma(SPI_TypeDef * SPIx, uint8_t * dest, uint32_t len);
+void spi_transfer_dma(SPI_TypeDef * SPIx, uint16_t * dest, uint32_t len);
 
 #endif
 
