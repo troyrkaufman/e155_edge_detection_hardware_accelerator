@@ -37,7 +37,7 @@ module top (
   );
 
   spramController spramCont (
-      .mainClk(mainClk),
+      .mainClk(oscClk),
       .nreset(nreset),
       .addressRead(addressRead),
       .addressWrite(addressWrite),
@@ -48,7 +48,7 @@ module top (
   );
 
   spiController spiCont (
-      .mainClk(mainClk),
+      .mainClk(oscClk),
       .spiClk(spiClk),
       .nreset(nreset),
       .sdi(sdi),
@@ -71,7 +71,7 @@ module top (
   );
 
   edgeDetect edgeDetectInst (
-      .clk(mainClk),
+      .clk(oscClk),
       .nreset(nreset),
       .inputValid(pixelDataValid),
       .pixelData(pixelData),
