@@ -57,14 +57,11 @@ module spiController (
 
   assign pixelDataValid = spiState == DATA_DONE;
 
-  assign nextSpiXVal = nextSpiState == DATA_DONE ? (spiXVal == 319 ? 0 : spiXVal + 1) : spiXVal;
-  assign nextSpiYVal = nextSpiState == DATA_DONE ? (spiYVal == 239 ? 0 : spiYVal + 1) : spiYVal;
-
   always_ff @(posedge mainClk, negedge nreset) begin : coordLogic
     if (~nreset) begin
       spiXVal <= 0;
       spiYVal <= 0;
-    end else if (spiState == DATA_DONE) begin
+    end else if (nextSpiState == DATA_DONE) begin
       spiXVal <= spiXVal + 1;
       if (spiXVal == 320) begin
         spiXVal <= 0;
@@ -81,7 +78,7 @@ module spiController (
     if (~nreset) begin
       pixelDataReg <= '{default: 0};
       modCounter   <= 0;
-    end else if (spiState == DATA_DONE) begin
+    end else if (nextSpiState == DATA_DONE) begin
       pixelDataReg[0][modCounter] <= spiLine[11:8];
       pixelDataReg[1][modCounter] <= spiLine[7:4];
       pixelDataReg[2][modCounter] <= spiLine[3:0];

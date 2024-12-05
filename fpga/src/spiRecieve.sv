@@ -8,7 +8,7 @@ module spiReceive #(
     output logic [11:0] writeData,
     output logic writeEnable
 );
-  logic [3:0] bitCounter;
+  logic [ 3:0] bitCounter;
   logic [15:0] writeDataBuffer;
   typedef enum logic [1:0] {
     WAITING,
@@ -35,23 +35,22 @@ module spiReceive #(
   end
 
 
-  always_ff @(negedge spiClk) begin : bitCounterLogic
-    if (currentState == RECEIVING) bitCounter <= bitCounter - 1;
+  always_ff @(negedge spiClk, negedge nreset) begin : bitCounterLogic
+    if (~nreset) bitCounter <= messageBits - 1;
+    else if (nextState == RECEIVING) bitCounter <= bitCounter - 1;
     else bitCounter <= messageBits - 1;
   end
 
   logic temp;
 
-  always_ff @(negedge spiClk) begin : writeDataLogic
-    if (currentState == RECEIVING) begin
+  always_ff @(negedge spiClk, negedge nreset) begin : writeDataLogic
+    if (~nreset) writeDataBuffer <= 'b0;
+    else if (nextState == RECEIVING) begin
       temp <= sdi;
       writeDataBuffer[bitCounter] <= sdi;
-    end else begin
-      writeDataBuffer <= 0;
-      temp <= 0;
     end
   end
 
-  assign writeEnable = (currentState == DONE);
-  assign writeData = writeDataBuffer[15:4];
+  assign writeEnable = (nextState == DONE);
+  assign writeData   = writeDataBuffer[15:4];
 endmodule
