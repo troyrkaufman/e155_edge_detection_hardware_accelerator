@@ -16,7 +16,7 @@ module top (
   logic [11:0] spiData;
   logic pixelDataValid, edgeValid;
 
-  logic [18:0] addressRead, addressWrite;
+  logic [18:0] addressRead, addressWrite, addressSpi;
 
   logic [3:0] pixelData[3][3];
 
@@ -55,8 +55,8 @@ module top (
       .ncs(ncs),
       .pixelData(pixelData),
       .pixelDataValid(pixelDataValid),
-      .spiXVal(addressWrite[9:0]),
-      .spiYVal(addressWrite[18:10])
+      .spiXVal(addressSpi[9:0]),
+      .spiYVal(addressSpi[18:10])
   );
 
   vgaController vgaCont (
@@ -75,8 +75,12 @@ module top (
       .nreset(nreset),
       .inputValid(pixelDataValid),
       .pixelData(pixelData),
+      .spiXVal(addressSpi[9:0]),
+      .spiYVal(addressSpi[18:10]),
       .edgeVal(edgeVal),
-      .edgeValValid(edgeValid)
+      .edgeValValid(edgeValid),
+      .edgeXVal(addressWrite[9:0]),
+      .edgeYVal(addressWrite[18:10])
   );
 
   assign red   = syncB ? 2'b00 : outVal;

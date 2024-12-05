@@ -143,17 +143,19 @@ module spramController (
 
   //* Output Logic
   always_comb begin
-    case (addressRead[2:0])
-      3'b000:  outVal = readData[1:0];
-      3'b001:  outVal = readData[3:2];
-      3'b010:  outVal = readData[5:4];
-      3'b011:  outVal = readData[7:6];
-      3'b100:  outVal = readData[9:8];
-      3'b101:  outVal = readData[11:10];
-      3'b110:  outVal = readData[13:12];
-      3'b111:  outVal = readData[15:14];
-      default: outVal = 'bx;  // should never happen
-    endcase
+    if (controlState == READ | controlState == LOAD) outVal = 0;
+    else
+      case (addressRead[2:0])
+        3'b000:  outVal = readData[1:0];
+        3'b001:  outVal = readData[3:2];
+        3'b010:  outVal = readData[5:4];
+        3'b011:  outVal = readData[7:6];
+        3'b100:  outVal = readData[9:8];
+        3'b101:  outVal = readData[11:10];
+        3'b110:  outVal = readData[13:12];
+        3'b111:  outVal = readData[15:14];
+        default: outVal = 'b0;  // should never happen
+      endcase
   end
 
 endmodule

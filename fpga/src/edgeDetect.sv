@@ -3,8 +3,12 @@ module edgeDetect (
     nreset,
     input logic inputValid,
     input logic [3:0] pixelData[3][3],
+    input logic [9:0] spiXVal,
+    input logic [8:0] spiYVal,
     output logic [1:0] edgeVal,
-    output logic edgeValValid
+    output logic edgeValValid,
+    output logic [9:0] edgeXVal,
+    output logic [8:0] edgeYVal
 );
 
   typedef enum logic [2:0] {
@@ -18,10 +22,10 @@ module edgeDetect (
   pipelineState_t pipelineState, nextState;
 
   logic [3:0] pixelDataReg[3][3];
-  logic [4:0] row1ValReg, row3ValReg, nextRow1Val, nextRow3Val;  // max val is 15+30+15 = 60
-  logic [4:0] col1ValReg, col3ValReg, nextCol1Val, nextCol3Val;  // max val is 15+30+15 = 60
+  logic [5:0] row1ValReg, row3ValReg, nextRow1Val, nextRow3Val;  // max val is 15+30+15 = 60
+  logic [5:0] col1ValReg, col3ValReg, nextCol1Val, nextCol3Val;  // max val is 15+30+15 = 60
 
-  logic [4:0] rowDiffReg, colDiffReg, nextRowDiff, nextColDiff;  // max val is 60 - 0 = 60
+  logic [5:0] rowDiffReg, colDiffReg, nextRowDiff, nextColDiff;  // max val is 60 - 0 = 60
 
   logic [11:0] rowSquare, colSquare;  // max val is 60^2 = 3600 = 12'b111000010000
 
@@ -37,7 +41,7 @@ module edgeDetect (
 
   bitCompress bitCompress (
       .inVal (sqrtValReg),
-      .outVal(nextEdgeVal)
+      .outVal(edgeVal)
   );
 
   always_ff @(posedge clk, negedge nreset) begin : stateLogic
@@ -45,6 +49,16 @@ module edgeDetect (
       pipelineState <= WAIT;
     end else begin
       pipelineState <= nextState;
+    end
+  end
+
+  always_ff @(posedge clk, negedge nreset) begin : edgeCoordLogic
+    if (~nreset) begin
+      edgeXVal <= 0;
+      edgeYVal <= 0;
+    end else if (nextState == ADD) begin
+      edgeXVal <= spiXVal;
+      edgeYVal <= spiYVal;
     end
   end
 
@@ -63,26 +77,24 @@ module edgeDetect (
   always_ff @(posedge clk, negedge nreset) begin : regLogic
     if (~nreset) begin
       pixelDataReg <= '{default: 0};
-      row1ValReg <= 0;
-      row3ValReg <= 0;
-      col1ValReg <= 0;
-      col3ValReg <= 0;
-      rowDiffReg <= 0;
-      colDiffReg <= 0;
+      row1ValReg   <= 0;
+      row3ValReg   <= 0;
+      col1ValReg   <= 0;
+      col3ValReg   <= 0;
+      rowDiffReg   <= 0;
+      colDiffReg   <= 0;
       squareSumReg <= 0;
-      sqrtValReg <= 0;
-      edgeVal <= 0;
+      sqrtValReg   <= 0;
     end else begin
       pixelDataReg <= pixelData;
-      row1ValReg <= nextRow1Val;
-      row3ValReg <= nextRow3Val;
-      col1ValReg <= nextCol1Val;
-      col3ValReg <= nextCol3Val;
-      rowDiffReg <= nextRowDiff;
-      colDiffReg <= nextColDiff;
+      row1ValReg   <= nextRow1Val;
+      row3ValReg   <= nextRow3Val;
+      col1ValReg   <= nextCol1Val;
+      col3ValReg   <= nextCol3Val;
+      rowDiffReg   <= nextRowDiff;
+      colDiffReg   <= nextColDiff;
       squareSumReg <= nextSquareSum;
-      sqrtValReg <= nextSqrtVal;
-      edgeVal <= nextEdgeVal;
+      sqrtValReg   <= nextSqrtVal;
     end
   end
 

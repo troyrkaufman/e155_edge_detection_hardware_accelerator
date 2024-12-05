@@ -61,37 +61,28 @@ module spiController (
     if (~nreset) begin
       spiXVal <= 0;
       spiYVal <= 0;
-    end else if (nextSpiState == DATA_DONE) begin
-      spiXVal <= spiXVal + 1;
-      if (spiXVal == 320) begin
-        spiXVal <= 0;
-        spiYVal <= spiYVal + 1;
-        if (spiYVal == 240) begin
-          spiXVal <= 0;
-          spiYVal <= 0;
-        end
-      end
+    end else if (spiState == DATA_DONE) begin
+      spiXVal <= nextSpiXVal;
+      spiYVal <= nextSpiYVal;
     end
   end
+
+  assign nextSpiXVal = spiXVal == 319 ? 0 : spiXVal + 1;
+  assign nextSpiYVal = (spiXVal == 319) ? (spiYVal == 239 ? 0 : spiYVal + 1) : spiYVal;
 
   always_ff @(posedge mainClk, negedge nreset) begin : dataLogic
     if (~nreset) begin
       pixelDataReg <= '{default: 0};
-      modCounter   <= 0;
     end else if (nextSpiState == DATA_DONE) begin
       pixelDataReg[0][modCounter] <= spiLine[11:8];
       pixelDataReg[1][modCounter] <= spiLine[7:4];
       pixelDataReg[2][modCounter] <= spiLine[3:0];
-      modCounter <= nextModCounter;
     end
   end
 
-  always_comb begin : modCounterLogic
-    if (spiXVal == 0) begin
-      nextModCounter = 0;
-    end else begin
-      nextModCounter = modCounter == 2 ? 0 : modCounter + 1;
-    end
+  always_ff @(posedge mainClk, negedge nreset) begin : modCounterLogic
+    if (~nreset) modCounter <= 0;
+    else if (spiState == DATA_DONE) modCounter <= modCounter == 2 ? 0 : modCounter + 1;
   end
 
   always_comb begin : pixelDataLogic
