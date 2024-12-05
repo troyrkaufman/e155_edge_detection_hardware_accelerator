@@ -24,7 +24,7 @@ void initSPI(SPI_TypeDef * SPIx, int br, int cpol, int cpha){
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_SSI, 0b1);
     SPIx->CR1 |= _VAL2FLD(SPI_CR1_MSTR, 0b1);
 
-    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b1111); // 16 bit data packet
+    SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b1011); // 16 bit data packet
     //SPIx->CR2 |= _VAL2FLD(SPI_CR2_DS, 0b0111); 
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_SSOE, 0b1);
     SPIx->CR2 |= _VAL2FLD(SPI_CR2_FRF, 0b0);
@@ -65,34 +65,25 @@ uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd){
     return readByte;
 }
 
-uint16_t spiColSend(SPI_TypeDef *SPIx, int CE, char byte1, char byte2, char byte3){
-    uint8_t nib1 = byte1 & 0x0F; // Mask the lower nibble
-    uint8_t nib2 = byte2 & 0x0F; // Mask the lower nibble
-    uint8_t nib3 = byte3 & 0x0F; // Mask the lower nibble
+uint16_t spiColSend(SPI_TypeDef *SPIx, char byte1, char byte2, char byte3){
+    uint8_t nib1 = (uint8_t) (byte1 & 0x0F); // Mask the lower nibble
+    uint8_t nib2 = (uint8_t) (byte2 & 0x0F); // Mask the lower nibble
+    uint8_t nib3 = (uint8_t) (byte3 & 0x0F); // Mask the lower nibble
 
     // Concatenate the nibbles into a 16-bit value
-    uint16_t dataToSend = (nib1 << 8) | (nib2 << 4) | nib3;
+    //uint16_t dataToSend = (nib1 << 12) | (nib2 << 8) | (nib3 << 4) | 0b0000;
 
     // Wait until the SPI is ready to transmit
     while (!(SPIx->SR & SPI_SR_TXE));
 
+    digitalWrite(PA8, 0);
     // Send the 16-bit value
-    SPIx->DR = dataToSend;
+    SPIx->DR = ((nib1 << 12) | (nib2 << 8) | (nib3<<4));
 
     // Wait until the transmission is complete
-    while (SPIx->SR & SPI_SR_BSY);
-    
-    
-    
-    /*
-    digitalWrite(CE, 0);
-    
-    while(!(SPIx->SR & SPI_SR_TXE)); 
-    *((volatile uint16_t *) &SPIx->DR) = ((nib1<<8) | (nib2<<4) | nib3);
-    while((!(SPIx->SR & SPI_SR_RXNE)));
-    return SPIx->DR;
-    digitalWrite(CE, 1);
-    */
+    while (!(SPIx->SR & SPI_SR_TXE));
+
+    digitalWrite(PA8, 1);
 }
 
 
