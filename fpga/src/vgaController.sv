@@ -11,7 +11,7 @@ module vgaController #(
     VMAX = VBP + VACTIVE + VSYNC
 ) (
     input logic vgaClk,
-    rst,
+    nreset,
     output logic hSync,
     vSync,
     syncB,
@@ -26,8 +26,8 @@ module vgaController #(
   assign hCount = hCountInternal >= 320 ? hCountInternal - 320 : hCountInternal;
   assign vCount = vCountInternal >= 240 ? vCountInternal - 240 : vCountInternal;
 
-  always @(posedge vgaClk, posedge rst) begin
-    if (rst) begin
+  always @(posedge vgaClk, negedge nreset) begin
+    if (~nreset) begin
       hCountInternal <= 0;
       vCountInternal <= 0;
     end else begin
