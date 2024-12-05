@@ -19,7 +19,7 @@ module spiController (
   logic spiDone;
 
   spiReceive #(
-      .messageBits(12)
+      .messageBits(16)
   ) spiReceiveInst (
       .spiClk(spiClk),
       .nreset(nreset),
