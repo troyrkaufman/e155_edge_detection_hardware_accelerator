@@ -8,7 +8,5 @@ module uPLogoRom (
     // Initialize logoRom with RGB values
     $readmemb("hex.txt", logoRom);
   end
-  logic [18:0] temp;
-  assign temp   = logoRom[yVal[2:0]];
   assign outVal = logoRom[yVal[2:0]][xVal[3:0]];
 endmodule
