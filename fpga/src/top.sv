@@ -36,6 +36,8 @@ module top (
       .outglobal_o(mainClk)
   );
 
+  logic [1:0] temp;
+
   spramController spramCont (
       .mainClk(mainClk),
       .nreset(nreset),
@@ -44,7 +46,7 @@ module top (
       .writeData(edgeVal),
       .load(edgeValid),
       .vgaClk(vgaClk),
-      .outVal(outVal)
+      .outVal(temp)
   );
 
   spiController spiCont (
@@ -83,9 +85,14 @@ module top (
       .edgeYVal(addressWrite[18:10])
   );
 
-  assign red   = syncB ? 2'b00 : outVal;
-  assign green = syncB ? 2'b00 : outVal;
-  assign blue  = syncB ? 2'b00 : outVal;
+  uPLogoRom bramInst (
+      addressRead[9:0],
+      addressRead[18:10],
+      outVal[0]
+  );
 
+  assign red   = ~syncB ? 2'b00 : (outVal[0] ? addressRead[9:8] : 2'b00);
+  assign green = ~syncB ? 2'b00 : (outVal[0] ? addressRead[7:6] : 2'b00);
+  assign blue  = ~syncB ? 2'b00 : (outVal[0] ? addressRead[5:4] : 2'b00);
 
 endmodule
