@@ -27,6 +27,16 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 !s11f vlog 2024.2 2024.05, May 20 2024
 13
 !s112 1.1
@@ -36,23 +46,23 @@ R1
 cModel Technology
 Z2 dC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject
 T_opt
-!s110 1733421070
-VlY>YZSX=RJ9E]KX8QmE_60
+!s110 1733465103
+V9ga1]UlfWXgTQB_2dB9dZ0
 04 6 4 work top_tb fast 0
-=3-04cf4b1dfbcd-6751e80e-28c-1298
+=6-04cf4b1dfbcd-6752940f-e9-469c
 R1
-!s12f OEM25U9 
+!s12f OEM25U10 
 !s12b OEM100
 !s124 OEM100
 !s135 nogc
-o-quiet -auto_acc_if_foreign -work work -L iCE40UP +acc
+o-quiet -auto_acc_if_foreign -work work -L iCE40UP +acc -L iCE40UP
 Z3 tCvgOpt 0
 n@_opt
 OL;O;2024.2;79
 vbitCompress
 2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv
 Z4 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z5 !s110 1733421064
+Z5 !s110 1733465099
 !i10b 1
 !s100 dBBMQg:W21<ZUPkkdbYDi3
 I9[2;e]ZAD9d@KneOnZn0F3
@@ -61,14 +71,14 @@ R2
 Z6 w1733392473
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv
-!i122 229
+!i122 332
 Z7 L0 1 13
 Z8 VDg1SIo80bB@j0V0VzS_@n1
 Z9 OL;L;2024.2;79
 r1
 !s85 0
 31
-Z10 !s108 1733421064.000000
+Z10 !s108 1733465099.000000
 !s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/bitCompress.sv|
 !i113 0
@@ -76,18 +86,18 @@ Z11 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R3
 nbit@compress
 vedgeDetect
-2C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv
+2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv
 R4
 R5
 !i10b 1
 !s100 BFD26d_=Q`[0M<JE_4e4S0
-IAb]ggHhL_Q=DzajiTbJ]80
+I2@iG8bf3nY`1k8RfAHHWA2
 S1
 R2
 w1733416200
-8C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv
-FC:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv
-!i122 230
+8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv
+FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv
+!i122 333
 L0 1 117
 R8
 R9
@@ -95,8 +105,8 @@ r1
 !s85 0
 31
 R10
-!s107 C:\\Users\\vikra\\OneDrive - Harvey Mudd College\\HMC\\FA24\\e155\\edgeDetect\\fpga\\src\\edgeDetect.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv|
+!s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv|
 !i113 0
 R11
 R3
@@ -113,7 +123,7 @@ R2
 w1733420954
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiController.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiController.sv
-!i122 231
+!i122 334
 L0 1 104
 R8
 R9
@@ -130,7 +140,7 @@ nspi@controller
 vspiReceive
 2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv
 R4
-Z12 !s110 1733421065
+R5
 !i10b 1
 !s100 alPMzgK2Q50<fTaz=8_5M1
 IWdWf1V6FmUFPN4V<E7RlL1
@@ -139,14 +149,14 @@ R2
 w1733411509
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv
-!i122 232
+!i122 335
 L0 1 56
 R8
 R9
 r1
 !s85 0
 31
-Z13 !s108 1733421065.000000
+R10
 !s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spiRecieve.sv|
 !i113 0
@@ -156,7 +166,7 @@ nspi@receive
 vspramController
 2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv
 R4
-R12
+Z12 !s110 1733465100
 !i10b 1
 !s100 PJ[8fezjeUFe=c1]O?df<1
 IKQ49jZH:bon3CT3j]m=G]3
@@ -165,14 +175,14 @@ R2
 w1733415809
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv
-!i122 233
+!i122 336
 L0 1 161
 R8
 R9
 r1
 !s85 0
 31
-R13
+R10
 !s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/spramController.sv|
 !i113 0
@@ -191,14 +201,14 @@ R2
 R6
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv
-!i122 234
+!i122 337
 R7
 R8
 R9
 r1
 !s85 0
 31
-R13
+Z13 !s108 1733465100.000000
 !s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/sqrtRom.sv|
 !i113 0
@@ -210,15 +220,15 @@ vtop
 R4
 R12
 !i10b 1
-!s100 T4[IA9OPNlQ9f7DH5S`7C0
-IP`d6MMGH:YoJz9][Gd;Fg1
+!s100 m9::6``CgA8_MkGAah=h;3
+I0DT?2VZP1<e>j81aN;Wd43
 S1
 R2
-w1733414875
+w1733463878
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/top.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/top.sv
-!i122 235
-L0 1 91
+!i122 338
+L0 1 98
 R8
 R9
 r1
@@ -233,75 +243,75 @@ R3
 vtop_sim
 2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv
 R4
-Z14 !s110 1733421066
+Z14 !s110 1733465101
 !i10b 1
-!s100 9m_gKlg31]QLU3>]5N7C<3
-IaY?G55eDf<:DFHEYWkTDn2
+!s100 UiBOX<5d]:gOT`Tg5E<SV3
+I8WjB@JHaK0ZOY]2U`b>Fz1
 S1
 R2
-w1733415400
+w1733464599
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv
-!i122 241
-L0 2 82
+!i122 344
+L0 1 90
 R8
 R9
 r1
 !s85 0
 31
-!s108 1733421066.000000
+Z15 !s108 1733465101.000000
 !s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv|
 !i113 0
 R11
 R3
 vtop_tb
-2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv
+2C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\finalProject\top_tb.sv
 R4
 R14
 !i10b 1
 !s100 :Qc=JTe<lMlOP27X1aU:G2
-I<;MmL]^N_LHd;bmoQgk:@3
+I5QSN:RA@NMNSOoQaV]8<i1
 S1
 R2
-w1733421054
-8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv
-FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv
-!i122 240
+w1733464437
+8C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\finalProject\top_tb.sv
+FC:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\finalProject\top_tb.sv
+!i122 343
 L0 2 50
 R8
 R9
 r1
 !s85 0
 31
-R13
-!s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv|
+R15
+!s107 C:\\Users\\vikra\\OneDrive - Harvey Mudd College\\HMC\\FA24\\e155\\edgeDetect\\fpga\\finalProject\\top_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\finalProject\top_tb.sv|
 !i113 0
 R11
 R3
 vuPLogoRom
-2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv
+2C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\uPLogoRom.sv
 R4
 R12
 !i10b 1
-!s100 Q1<Uo^B4VPd@zF8@5A>Y41
-I5lWMFRni`]`99G<T[3^;30
+!s100 ]Qe7f41>bGKeQn3lQDdhj2
+I`bKMCR7@i;h6[j5POR>2A3
 S1
 R2
-R6
-8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv
-FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv
-!i122 236
-L0 1 12
+w1733465094
+8C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\uPLogoRom.sv
+FC:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\uPLogoRom.sv
+!i122 339
+L0 1 14
 R8
 R9
 r1
 !s85 0
 31
 R13
-!s107 C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv|
+!s107 C:\\Users\\vikra\\OneDrive - Harvey Mudd College\\HMC\\FA24\\e155\\edgeDetect\\fpga\\src\\uPLogoRom.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\uPLogoRom.sv|
 !i113 0
 R11
 R3
@@ -318,7 +328,7 @@ R2
 R6
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vga.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vga.sv
-!i122 237
+!i122 340
 L0 1 33
 R8
 R9
@@ -343,7 +353,7 @@ R2
 w1733404077
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vgaController.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/vgaController.sv
-!i122 238
+!i122 341
 L0 1 54
 R8
 R9
@@ -360,16 +370,16 @@ nvga@controller
 vvideoGen
 2C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/videoGen.sv
 R4
-R12
+R14
 !i10b 1
-!s100 mVEaggg4kojRLQzK=g<JZ3
-I5lFj7a5P^ndeC]3HU_Ol;2
+!s100 o^3?c;W9?B_eK16_XWla[1
+IiCbgfDInaFYo9YX76hI5H3
 S1
 R2
-R6
+w1733463251
 8C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/videoGen.sv
 FC:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/videoGen.sv
-!i122 239
+!i122 342
 L0 1 11
 R8
 R9

@@ -1,4 +1,4 @@
-{C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv}
+{C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\finalProject\top_tb.sv}
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module top_tb
 
@@ -19,10 +19,10 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 Top level modules:
 	bitCompress
 
-} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv} {2 {vlog -work work -vopt -sv -stats=none {C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv}
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv} {2 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv}
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module edgeDetect
-** Warning: C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\edgeDetect.sv(5): (vlog-13314) Defaulting port 'pixelData' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Warning: C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/edgeDetect.sv(5): (vlog-13314) Defaulting port 'pixelData' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
 
 Top level modules:
 	edgeDetect
@@ -69,14 +69,7 @@ Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 Top level modules:
 	vgaController
 
-} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/finalProject/top_sim.sv}
-Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
--- Compiling module top_sim
-
-Top level modules:
-	top_sim
-
-} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv}
+} {} {}} {C:/Users/vikra/OneDrive - Harvey Mudd College/HMC/FA24/e155/edgeDetect/fpga/src/uPLogoRom.sv} {1 {vlog -work work -vopt -sv -stats=none {C:\Users\vikra\OneDrive - Harvey Mudd College\HMC\FA24\e155\edgeDetect\fpga\src\uPLogoRom.sv}
 Questa Lattice OEM Edition-64 vlog 2024.2 Compiler 2024.05 May 20 2024
 -- Compiling module uPLogoRom
 

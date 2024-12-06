@@ -1,4 +1,3 @@
-
 module top_sim (
     input logic spiClk,
     sdi,
@@ -12,8 +11,9 @@ module top_sim (
     green,
     blue
 );
-  logic oscClk, vgaClk;
+  logic oscClk, mainClk, vgaClk;
   logic [1:0] outVal, edgeVal;
+  logic [11:0] spiData;
   logic pixelDataValid, edgeValid;
 
   logic [18:0] addressRead, addressWrite, addressSpi;
@@ -21,12 +21,14 @@ module top_sim (
   logic [3:0] pixelData[3][3];
 
   HSOSC #(
-      .CLKHF_DIV("0b00")
+      .CLKHF_DIV("0b10")
   ) hsosc (
       .CLKHFEN(1'b1),
       .CLKHFPU(1'b1),
       .CLKHF  (oscClk)
   );
+
+  logic [1:0] temp;
 
   spramController spramCont (
       .mainClk(oscClk),
@@ -36,7 +38,7 @@ module top_sim (
       .writeData(edgeVal),
       .load(edgeValid),
       .vgaClk(vgaClk),
-      .outVal(outVal)
+      .outVal(temp)
   );
 
   spiController spiCont (
@@ -75,9 +77,14 @@ module top_sim (
       .edgeYVal(addressWrite[18:10])
   );
 
-  assign red   = syncB ? 2'b00 : outVal;
-  assign green = syncB ? 2'b00 : outVal;
-  assign blue  = syncB ? 2'b00 : outVal;
+  uPLogoRom bramInst (
+      addressRead[9:0],
+      addressRead[18:10],
+      outVal[0]
+  );
 
+  assign red   = ~syncB ? 2'b00 : (outVal[0] ? addressRead[9:8] : 2'b00);
+  assign green = ~syncB ? 2'b00 : (outVal[0] ? addressRead[7:6] : 2'b00);
+  assign blue  = ~syncB ? 2'b00 : (outVal[0] ? addressRead[5:4] : 2'b00);
 
 endmodule
