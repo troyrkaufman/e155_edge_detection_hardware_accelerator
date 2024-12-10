@@ -1,0 +1,1254 @@
+# //  Questa Lattice OEM Edition-64
+# //  Version 2024.2 linux_x86_64 May 20 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading project edgeDetectSim
+# Compile of spiRecieve.sv failed with 4 errors.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 1 failed with 4 errors.
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim work.spiTestbench -voptargs=+acc
+# vsim work.spiTestbench -voptargs="+acc" 
+# Start time: 10:06:36 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Error (suppressible): /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(6): (vopt-13259) Missing instance name in instantiation of module/program/interface 'spiReceive'.
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=1.
+# Error loading design
+# End time: 10:06:36 on Dec 01,2024, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 8
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim work.spiTestbench -voptargs=+acc
+# vsim work.spiTestbench -voptargs="+acc" 
+# Start time: 10:07:24 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Error (suppressible): /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(6): (vopt-2912) Port 'nrst' not found in module 'spiReceive' (1st connection).
+# ** Error (suppressible): /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(6): (vopt-2912) Port 'clk' not found in module 'spiReceive' (3rd connection).
+# ** Error (suppressible): /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(6): (vopt-2912) Port 'we' not found in module 'spiReceive' (5th connection).
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=3, Warnings=1.
+# Error loading design
+# End time: 10:07:24 on Dec 01,2024, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 3
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim work.spiTestbench -voptargs=+acc
+# vsim work.spiTestbench -voptargs="+acc" 
+# Start time: 10:08:28 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Error (suppressible): /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(26): (vopt-7061) Variable 'sendData' driven in an always_ff block, may not be driven by any other process. See /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(21).
+# Optimization failed
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 12.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=2, Warnings=1.
+# Error loading design
+# End time: 10:08:29 on Dec 01,2024, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 3
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim work.spiTestbench -voptargs=+acc
+# vsim work.spiTestbench -voptargs="+acc" 
+# Start time: 10:10:30 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+add wave -position end  sim:/spiTestbench/nRst
+add wave -position end  sim:/spiTestbench/cs
+add wave -position end  sim:/spiTestbench/clk
+add wave -position end  sim:/spiTestbench/sdo
+add wave -position end  sim:/spiTestbench/we
+add wave -position end  sim:/spiTestbench/writeData
+add wave -position end  sim:/spiTestbench/sendData
+run 1000
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+exit
+break
+# invoked "break" outside of a loop
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Received data: xxxxxxxx
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Received data: 00000000
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 100
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+run 1000
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+add wave -position end  sim:/spiTestbench/nRst
+add wave -position end  sim:/spiTestbench/cs
+add wave -position end  sim:/spiTestbench/clk
+add wave -position end  sim:/spiTestbench/sdo
+add wave -position end  sim:/spiTestbench/we
+add wave -position end  sim:/spiTestbench/writeData
+add wave -position end  sim:/spiTestbench/sendData
+add wave -position end  sim:/spiTestbench/counter
+add wave -position end  sim:/spiTestbench/nextCounter
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Reset
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv failed with 1 errors.
+# 7 compiles, 1 failed with 1 error.
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: x1001110
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: x1001110
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011100x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 10011100
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv failed with 1 errors.
+# 7 compiles, 1 failed with 1 error.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 10011100
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 10011100
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 10011101
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 110 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv failed with 1 errors.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 1 failed with 1 error.
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011101x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+add wave -position end  sim:/spiTestbench/sampleSpi/messageBits
+add wave -position end  sim:/spiTestbench/sampleSpi/spiClk
+add wave -position end  sim:/spiTestbench/sampleSpi/nRst
+add wave -position end  sim:/spiTestbench/sampleSpi/sdi
+add wave -position end  sim:/spiTestbench/sampleSpi/cs
+add wave -position end  sim:/spiTestbench/sampleSpi/writeData
+add wave -position end  sim:/spiTestbench/sampleSpi/writeEnable
+add wave -position end  sim:/spiTestbench/sampleSpi/bitCounter
+add wave -position end  sim:/spiTestbench/sampleSpi/currentState
+add wave -position end  sim:/spiTestbench/sampleSpi/nextState
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011101x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011101x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 00000000
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011101x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+add wave -position 15  sim:/spiTestbench/sampleSpi/temp
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 0011101x
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 120 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+# Warning in wave window restart: (vish-4014) No objects found matching '/spiTestbench/sampleSpi/nextState'. 
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 10011100
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(36)
+#    Time: 100 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 36
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 10000
+# Reset
+# Reset
+# Reset
+# Received data: xxxxxxx0
+# Received data: xxxxxxx0
+# Received data: xx000000
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 300 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 10000
+# Reset
+# Reset
+# Reset
+# Received data: 10011100
+# Received data: 11111110
+# Received data: 11000000
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 300 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 10000
+# Reset
+# Reset
+# Reset
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 270 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 10000
+# Reset
+# Reset
+# Reset
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 270 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vopt-143) Recognized 1 FSM in module "spiReceive(fast)".
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 1000
+# Reset
+# Reset
+# Reset
+# Received data: 00000000
+# Received data: 00000000
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 290 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.spiTestbench(fast)
+# Loading work.spiReceive(fast)
+run 10000
+# Reset
+# Reset
+# Reset
+# Received data: 00000000
+# Received data: 00000000
+# ** Note: $finish    : /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv(42)
+#    Time: 290 ns  Iteration: 1  Instance: /spiTestbench
+# 1
+# Break in Module spiTestbench at /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/testbenches/spiTestbench.sv line 42
+# Errors: 0, Warnings: 2
+# Compile of spiRecieve.sv was successful with warnings.
+# Compile of top.sv was successful with warnings.
+# Compile of uPLogoRom.sv was successful with warnings.
+# Compile of vga.sv was successful with warnings.
+# Compile of vgaController.sv was successful with warnings.
+# Compile of videoGen.sv was successful with warnings.
+# Compile of spiTestbench.sv was successful with warnings.
+# 7 compiles, 0 failed with no errors.
+# Project file /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf is write protected, data cannot be saved.
+# Unable to save project.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Error: (vsim-7) Failed to open ini file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" in read mode.
+# No such file or directory. (errno = ENOENT)
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (vopt-14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Warning: (14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Warning: (14) Failed to open "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# ** Error: (vopt-7) Failed to open  file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/work/@_opt/_deps" in read mode.
+# ** Warning: (vopt-56) Problem with optimized design dependency file "/home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/work/@_opt/_deps" - file open failed. (Code 12)
+# No such file or directory. (errno = ENOENT)
+# ** Fatal: (vopt-8) Problem while reading dependency file "_deps".
+# No such file or directory. (errno = ENOENT)
+# Vopt Compiler exiting
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=3, Warnings=3.
+# Break key hit
+quit -sim
+# Project file /home/anonymousvikram/workspace/e155/work/fpgaSpi/fpga/edgeDetectSim.mpf is write protected, data cannot be saved.
+# Unable to save project.
+# End time: 13:50:29 on Dec 01,2024, Elapsed time: 3:39:59
+# Errors: 3, Warnings: 3
+# reading /home/anonymousvikram/.lscc/questasim/linux_x86_64/../modelsim.ini
+# Loading project edgeDetectSim
+# Compile of spiRecieve.sv was successful.
+# Compile of top.sv was successful.
+# Compile of uPLogoRom.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vgaController.sv was successful.
+# Compile of videoGen.sv was successful.
+# Compile of spiTestbench.sv was successful.
+# 7 compiles, 0 failed with no errors.
+vsim -voptargs=+acc work.spiTestbench
+# vsim -voptargs="+acc" work.spiTestbench 
+# Start time: 13:51:15 on Dec 01,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# 
+# ** License Issue: License server does not support this feature (latticeqsim)
+# ** License Issue: Invalid host. (/home/anonymousvikram/.lscc/bin/lin64/../../license/license.dat)
+# ** Error: Failure to obtain a Verilog simulation license. Unable to checkout 'latticeqsim' license.
+# Error loading design
+# End time: 13:51:15 on Dec 01,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 3
