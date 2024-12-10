@@ -9,6 +9,7 @@
 #define MAIN_H
 
 #include "../lib/STM32L432KC.h"
+#include "PROCESS_IMAGE.h"
 
 #define ADDR 0x30 // write ADDRess to camera module
 #define LENGTH 43
@@ -17,25 +18,25 @@
 #define I2C_SCL PA9
 #define I2C_SDA PA10
 
-// SPI1 Pins
+// // SPI1 Pins
 #define SCLK1 PA5
 #define MOSI1 PA7
 #define MISO1 PA6
 #define CE1 PA8
-#define NSS1 PB0
+// #define NSS1 PB0
 
-// SPI3 Pins
-#define SCLK2 PB3
-#define MOSI2 PB5
-#define MISO2 PB4
-#define CE2 PB1
+// // SPI3 Pins
+// #define SCLK2 PB3
+// #define MOSI2 PB5
+// #define MISO2 PB4
+// #define CE2 PB1
 
-#define BUFFER_SIZE_R 3840 // should be 640*3*2
-#define BUFFER_SIZE_T 1 // should be 640
+// #define BUFFER_SIZE_R 3840 // should be 640*3*2
+// #define BUFFER_SIZE_T 1 // should be 640
 
-uint8_t grayBuf[9] __attribute__((section(".sram1_data"))) = {
-  0x13, 0x18, 0x58, 0xda, 0x3f, 0xac, 0x44, 0xd1, 0x82
-};
+// uint8_t grayBuf[9] __attribute__((section(".sram1_data"))) = {
+//   0x13, 0x18, 0x58, 0xda, 0x3f, 0xac, 0x44, 0xd1, 0x82
+// };
 
 /*
 uint8_t  regBuf[40] __attribute__((section(".sram1_data")))  = { // 40 bytes  
@@ -62,7 +63,7 @@ uint8_t data[LENGTH] __attribute__((section(".sram1_data"))) = {
 
 #endif // MAIN_H
 
-/*
+
 uint8_t regBuf[40] = { // 40 bytes
     0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00,
      0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00, 0x3d, 0x00,

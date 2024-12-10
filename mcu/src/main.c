@@ -44,6 +44,9 @@ int main(void) {
   GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL7, 5);    // MOSI PA7 
   GPIOA->AFR[0] |= _VAL2FLD(GPIO_AFRL_AFSEL6, 5);    // MISO PA6
 
+  // Initialize Timer
+  initTIM(TIM15);
+
   // Initialize SPI Peripheral 
   initSPI(SPI1, 1, 0, 0);  
 
@@ -51,18 +54,20 @@ int main(void) {
   digitalWrite(CE1, 1);
  
   // Keep CE low all the time
-  digitalWrite(CE1, 0);
+  //digitalWrite(CE1, 0);
 
   ////////////////////////////////
   // Main Loop
   ////////////////////////////////
 
-  //fread(void *, size_t, size_t, FILE *)
-
   while (1){
-    for (volatile int i = 0; i < sizeof(grayBuf)/3; i++){     
-      spiColSend(SPI1, CE1, grayBuf[i], grayBuf[i+3], grayBuf[i+6]);
+    processFile();
     }
-     }
   }
+
+
+
+
+
+
 

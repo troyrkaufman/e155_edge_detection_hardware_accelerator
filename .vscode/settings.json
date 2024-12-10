@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "main.h": "c"
+        "main.h": "c",
+        "stm32l432kc.h": "c",
+        "stm32l432kc_i2c.h": "c"
     }
 }

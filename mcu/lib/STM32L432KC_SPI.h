@@ -39,6 +39,6 @@ char spiSendReceive(SPI_TypeDef *SPIx, char send);
 uint8_t spiTransaction(SPI_TypeDef * SPIx, int CE, char addr, char cmd);
 
 // Sends a 12 bit signal 
-uint16_t spiColSend(SPI_TypeDef *SPIx, int CE, char byte1, char byte2, char byte3);
+uint16_t spiColSend(SPI_TypeDef *SPIx, char byte1, char byte2, char byte3);
 
 #endif
