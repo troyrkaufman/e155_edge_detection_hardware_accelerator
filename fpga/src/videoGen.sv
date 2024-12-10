@@ -1,11 +1,24 @@
 module videoGen (
-  input logic [9:0] x, y,
-  output logic [7:0] r, g, b
+    input logic clk,
+    input logic [9:0] x,
+    y,
+    output logic [3:0] r,
+    g,
+    b
 );
-  logic [2:0][7:0] pixel;
-  uPLogoRom uPLogoRom(x, y, pixel);
+  // logic [2:0][3:0] pixel;
+  logic pixelPresent;
 
-  assign r = pixel[0];
-  assign g = pixel[1];
-  assign b = pixel[2];  
+  uPLogoRom logoRom (
+      .clk(clk),
+      .xVal(x),
+      .yVal(y),
+      .pixelPresent(pixelPresent)
+  );
+
+  always_comb begin
+    r = pixelPresent ? 4'b1111 & {4{y[1]}} : 'b0;
+    g = pixelPresent ? 4'b1111 & {4{~y[1]}} : 'b0;
+    b = pixelPresent ? 4'b1111 & {4{y[2]}} : 'b0;
+  end
 endmodule

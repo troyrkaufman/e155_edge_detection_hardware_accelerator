@@ -4,9 +4,9 @@
 #ifndef STM32L4_I2C_H
 #define STM32L4_I2C_H
 
+#include "STM32L432KC_GPIO.h"
 #include <stdint.h>
 #include <stm32l432xx.h>
-#include "STM32L432KC_GPIO.h"
 
 #define I2C_SCL PA9
 #define I2C_SDA PA10
@@ -18,4 +18,3 @@ void init_I2C();
 void write_I2C(char addr, char reg, char data);
 
 #endif
-
